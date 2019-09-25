@@ -38,6 +38,13 @@ in {
     xclip
   ];
 
+  home.sessionVariables = {
+    ICEAUTHORITY = "$XDG_CACHE_HOME/ICEauthority";
+    XAUTHORITY = "$XDG_RUNTIME_DIR/Xauthority";
+    XCOMPOSECACHE = "$XDG_CACHE_HOME/X11/xcompose";
+    XCOMPOSEFILE = "$XDG_CONFIG_HOME/X11/xcompose";
+  };
+
   programs.alacritty = {
     enable = true;
     settings = {
@@ -69,8 +76,6 @@ in {
     initExtra = ''
       xrandr -r 144
     '';
-
-    scriptPath = ".local/bin/xsession";
 
     windowManager.xmonad = {
       enable = true;
