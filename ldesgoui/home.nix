@@ -35,7 +35,8 @@
     historyFile = "$XDG_CACHE_HOME/bash/history";
     sessionVariables = { PROMPT_COMMAND = "history -a"; };
     shellAliases = {
-      ls = "LC_COLLATE=C ls -F --color=always --group-directories-first --si";
+      # ls = "LC_COLLATE=C ls -F --color=always --group-directories-first --si";
+      ls = "exa";
       cat = "bat";
     };
   };
