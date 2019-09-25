@@ -19,10 +19,12 @@
 
   services.journald.extraConfig = "MaxRetentionSec=1month";
 
-  swapDevices = [{
-    device = "/var/swap";
-    size = 4096;
-  }];
+  swapDevices = [
+    {
+      device = "/var/swap";
+      size = 4096;
+    }
+  ];
 
   system.stateVersion = "18.09";
 

@@ -13,13 +13,15 @@
 
       privateKeyFile = "/root/wireguard/private";
 
-      peers = [{
-        publicKey = "QDEuEy768a+sQ2w+jvAzx2OJmHHgcaPpKQlifVFgzF0=";
+      peers = [
+        {
+          publicKey = "QDEuEy768a+sQ2w+jvAzx2OJmHHgcaPpKQlifVFgzF0=";
 
-        allowedIPs = [ "10.0.0.1" ];
+          allowedIPs = [ "10.0.0.1" ];
 
-        endpoint = "home.ldesgoui.xyz:51820";
-      }];
+          endpoint = "home.ldesgoui.xyz:51820";
+        }
+      ];
     };
   };
 

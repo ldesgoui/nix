@@ -19,7 +19,8 @@ let
     # "Ubuntu Mono"
   ;
 
-in {
+in
+{
   imports = [ ./home.nix ];
 
   fonts.fontconfig.enable = true;
