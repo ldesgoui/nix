@@ -30,13 +30,10 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  nixpkgs.overlays = [
-    # TODO rust
-  ];
-
   programs.bash = {
     enable = true;
     historyFile = "$XDG_CACHE_HOME/bash/history";
+    sessionVariables = { PROMPT_COMMAND = "history -a"; };
     shellAliases = {
       ls =
         "LC_COLLATE=C ls --classify --color=always --group-directories-first --si";
@@ -89,10 +86,10 @@
     enable = true;
 
     configFile."npm/npmrc".text = ''
-      prefix=$${XDG_DATA_HOME}/npm
-      cache=$${XDG_CACHE_HOME}/npm
-      tmp=$${XDG_RUNTIME_DIR}/npm
-      init-module=$${XDG_CONFIG_HOME}/npm/config/npm-init.js
+      prefix=''${XDG_DATA_HOME}/npm
+      cache=''${XDG_CACHE_HOME}/npm
+      tmp=''${XDG_RUNTIME_DIR}/npm
+      init-module=''${XDG_CONFIG_HOME}/npm/config/npm-init.js
     '';
   };
 }

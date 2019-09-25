@@ -40,7 +40,7 @@ in {
 
   home.sessionVariables = {
     ICEAUTHORITY = "$XDG_CACHE_HOME/ICEauthority";
-    XAUTHORITY = "$XDG_RUNTIME_DIR/Xauthority";
+    # XAUTHORITY = "$XDG_RUNTIME_DIR/Xauthority";
     XCOMPOSECACHE = "$XDG_CACHE_HOME/X11/xcompose";
     XCOMPOSEFILE = "$XDG_CONFIG_HOME/X11/xcompose";
   };
@@ -87,12 +87,12 @@ in {
     source = ./xmonad.hs;
     onChange = ''
       echo "Recompiling xmonad"
-      $DRY_RUN_CMD ${config.xsession.windowManager.command} --recompile
+      $DRY_RUN_CMD xmonad --recompile
 
       # Attempt to restart xmonad if X is running.
       if [[ -v DISPLAY ]] ; then
         echo "Restarting xmonad"
-        $DRY_RUN_CMD ${config.xsession.windowManager.command} --restart
+        $DRY_RUN_CMD xmonad --restart
       fi
     '';
   };
