@@ -7,16 +7,20 @@
   programs.bash.enableCompletion = true;
 
   services.xserver = {
-    # desktopManager.xterm.enable = false;
+    desktopManager.xterm.enable = false;
 
-    # displayManager.auto = {
-    #   enable = true;
-    #   user = "ldesgoui";
-    # };
+    displayManager.auto = {
+      enable = true;
+      user = "ldesgoui";
+    };
 
     enable = true;
 
     libinput.enable = true;
+
+    windowManager.default = "xmonad";
+
+    windowManager.xmonad.enable = true;
 
     xkbOptions = "ctrl:nocaps";
   };

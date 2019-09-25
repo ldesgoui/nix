@@ -1,5 +1,5 @@
 # graphical.nix
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 
 let
   font =
@@ -50,9 +50,7 @@ in {
 
   programs.feh.enable = true;
 
-  # programs.firefox = {
-  #   enable = true;
-  # };
+  programs.firefox = { enable = true; };
 
   programs.mpv = { enable = true; };
 
@@ -66,8 +64,6 @@ in {
 
   # services.redshift
 
-  # xresources
-
   xsession = {
     enable = true;
     initExtra = ''
@@ -79,9 +75,20 @@ in {
     windowManager.xmonad = {
       enable = true;
       enableContribAndExtras = true;
-      # config = pkgs.writeText "xmonad.hs" ''
-
     };
   };
 
+  xdg.configFile."xmonad/xmonad.hs" = {
+    source = ./xmonad.hs;
+    onChange = ''
+      echo "Recompiling xmonad"
+      $DRY_RUN_CMD ${config.xsession.windowManager.command} --recompile
+
+      # Attempt to restart xmonad if X is running.
+      if [[ -v DISPLAY ]] ; then
+        echo "Restarting xmonad"
+        $DRY_RUN_CMD ${config.xsession.windowManager.command} --restart
+      fi
+    '';
+  };
 }
