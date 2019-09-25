@@ -1,3 +1,4 @@
+# network.nix
 { ... }: {
   networking = {
     hostName = "desktop.home.ldesgoui.xyz";

@@ -1,3 +1,4 @@
+# system.nix
 { ... }: {
   boot.cleanTmpDir = true;
 

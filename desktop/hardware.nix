@@ -1,3 +1,4 @@
+# hardware.nix
 { ... }: {
   boot = {
     initrd = {

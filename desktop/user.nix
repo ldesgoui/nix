@@ -1,3 +1,4 @@
+# user.nix
 { ... }: {
   hardware.pulseaudio.enable = true;
 
