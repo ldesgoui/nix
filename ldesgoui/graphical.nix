@@ -67,7 +67,7 @@ in
   services.dunst = {
     enable = true;
     settings.global = {
-      geometry = "0x5-20+100";
+      geometry = "0x5-20+20";
       font = "${font} 12";
       padding = 8;
       horizontal_padding = 8;
