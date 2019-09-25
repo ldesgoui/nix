@@ -40,7 +40,7 @@ in {
 
   home.sessionVariables = {
     ICEAUTHORITY = "$XDG_CACHE_HOME/ICEauthority";
-    # XAUTHORITY = "$XDG_RUNTIME_DIR/Xauthority";
+    # XAUTHORITY = "$XDG_RUNTIME_DIR/Xauthority"; # breaks things
     XCOMPOSECACHE = "$XDG_CACHE_HOME/X11/xcompose";
     XCOMPOSEFILE = "$XDG_CONFIG_HOME/X11/xcompose";
   };
@@ -57,25 +57,33 @@ in {
 
   programs.feh.enable = true;
 
-  programs.firefox = { enable = true; };
+  programs.firefox.enable = true;
 
-  programs.mpv = { enable = true; };
+  programs.mpv.enable = true;
 
-  # programs.obs-studio
+  programs.zathura.enable = true;
 
-  programs.zathura = { enable = true; };
-
-  # services.compton
-
-  services.dunst = { enable = true; };
-
-  # services.redshift
+  services.dunst = {
+    enable = true;
+    settings.global = {
+      geometry = "0x5-20+100";
+      font = "${font} 12";
+      padding = 8;
+      horizontal_padding = 8;
+    };
+  };
 
   xsession = {
     enable = true;
+
     initExtra = ''
       xrandr -r 144
     '';
+
+    pointerCursor = {
+      package = pkgs.vanilla-dmz;
+      name = "Vanilla-DMZ";
+    };
 
     windowManager.xmonad = {
       enable = true;

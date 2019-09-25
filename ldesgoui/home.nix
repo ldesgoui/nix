@@ -2,7 +2,7 @@
 { pkgs, ... }:
 
 {
-  home.packages = with pkgs; [ ffmpeg file httpie p7zip ];
+  home.packages = with pkgs; [ exa ffmpeg file httpie p7zip ripgrep ];
 
   home.sessionVariables = {
     PATH = "$PATH:$HOME/.local/bin";
@@ -35,8 +35,8 @@
     historyFile = "$XDG_CACHE_HOME/bash/history";
     sessionVariables = { PROMPT_COMMAND = "history -a"; };
     shellAliases = {
-      ls =
-        "LC_COLLATE=C ls --classify --color=always --group-directories-first --si";
+      ls = "LC_COLLATE=C ls -F --color=always --group-directories-first --si";
+      cat = "bat";
     };
   };
 
@@ -46,9 +46,9 @@
 
   programs.command-not-found.enable = true;
 
-  # programs.direnv
+  programs.direnv.enable = true;
 
-  # programs.fzf.enable = true;
+  programs.fzf.enable = true;
 
   programs.git = {
     enable = true;
@@ -56,7 +56,17 @@
     userName = "ldesgoui";
   };
 
-  programs.htop = { enable = true; };
+  programs.htop = {
+    enable = true;
+    delay = 2;
+    fields = [ "PID" "USER" "PERCENT_CPU" "PERCENT_MEM" "TIME" "COMM" ];
+    hideThreads = true;
+    hideUserlandThreads = true;
+    highlightBaseName = true;
+    shadowOtherUsers = true;
+    showProgramPath = false;
+    treeView = true;
+  };
 
   programs.jq.enable = true;
 
