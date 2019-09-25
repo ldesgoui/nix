@@ -1,5 +1,5 @@
 # hardware.nix
-{ ... }: {
+{ pkgs, ... }: {
   boot = {
     initrd = {
       availableKernelModules = [ "xhci_pci" "ahci" "usbhid" "sd_mod" ];
@@ -24,8 +24,15 @@
   };
 
   fileSystems = {
-    "/".device = "/dev/disk/by-label/nixos";
-    "/boot".device = "/dev/disk/by-label/boot";
+    "/" = {
+      device = "/dev/disk/by-label/nixos";
+      fsType = "ext4";
+    };
+
+    "/boot" = {
+      device = "/dev/disk/by-label/boot";
+      fsType = "vfat";
+    };
   };
 
   hardware = {

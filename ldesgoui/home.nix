@@ -5,7 +5,7 @@
   home.packages = with pkgs; [ ffmpeg file httpie p7zip ];
 
   home.sessionVariables = {
-    PATH = "$HOME/.local/bin";
+    PATH = "$PATH:$HOME/.local/bin";
     EDITOR = "nvim";
     LESSHISTFILE = "/dev/null";
     # PROMPT_COMMAND = "history -a";
