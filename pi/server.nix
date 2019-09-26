@@ -18,7 +18,7 @@ in
     domains = [ "ldesgoui.xyz" ];
     enable = true;
     fqdn = "home.ldesgoui.xyz";
-    localDnsResolver = false;
+    # localDnsResolver = false;
 
     loginAccounts."ldesgoui@ldesgoui.xyz" = {
       hashedPassword = import ../secrets/emailHashedPassword.nix;
