@@ -1,5 +1,5 @@
 # home.nix
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 
 {
   home.packages = with pkgs; [ exa ffmpeg file httpie p7zip ripgrep ];
@@ -8,35 +8,39 @@
     PATH = "$PATH:$HOME/.local/bin";
     EDITOR = "nvim";
 
-    BUNDLE_USER_CACHE = "$XDG_CACHE_HOME/bundle";
-    BUNDLE_USER_CONFIG = "$XDG_CONFIG_HOME/bundle";
-    BUNDLE_USER_PLUGIN = "$XDG_DATA_HOME/bundle";
-    CARGO_HOME = "$XDG_DATA_HOME/cargo";
-    GEM_HOME = "$XDG_DATA_HOME/gem";
-    GEM_SPEC_CACHE = "$XDG_CACHE_HOME/gem";
-    HTTPIE_CONFIG_DIR = "$XDG_CONFIG_HOME/httpie";
-    LESSHISTFILE = "XDG_CACHE_HOME/less/history";
-    LESSKEY = "$XDG_CONFIG_HOME/less/lesskey";
-    NODE_REPL_HISTORY = "$XDG_DATA_HOME/node_repl_history";
-    NPM_CONFIG_USERCONFIG = "$XDG_CONFIG_HOME/npm/npmrc";
-    PGPASSFILE = "$XDG_CONFIG_HOME/pg/pgpass";
-    PGSERVICEFILE = "$XDG_CONFIG_HOME/pg/pg_service.conf";
-    PSQLRC = "$XDG_CONFIG_HOME/pg/psqlrc";
-    PSQL_HISTORY = "$XDG_CACHE_HOME/pg/psql_history";
-    PYTHON_EGG_CACHE = "$XDG_CACHE_HOME/python-eggs";
-    RUSTUP_HOME = "$XDG_DATA_HOME/rustup";
-    STACK_ROOT = "$XDG_DATA_HOME/stack";
+    BUNDLE_USER_CACHE = "${config.xdg.cacheHome}/bundle";
+    BUNDLE_USER_CONFIG = "${config.xdg.configHome}/bundle";
+    BUNDLE_USER_PLUGIN = "${config.xdg.dataHome}/bundle";
+    CARGO_HOME = "${config.xdg.dataHome}/cargo";
+    GEM_HOME = "${config.xdg.dataHome}/gem";
+    GEM_SPEC_CACHE = "${config.xdg.cacheHome}/gem";
+    HTTPIE_CONFIG_DIR = "${config.xdg.configHome}/httpie";
+    LESSHISTFILE = "${config.xdg.cacheHome}/less/history";
+    LESSKEY = "${config.xdg.configHome}/less/lesskey";
+    NODE_REPL_HISTORY = "${config.xdg.dataHome}/node_repl_history";
+    NPM_CONFIG_USERCONFIG = "${config.xdg.configHome}/npm/npmrc";
+    PGPASSFILE = "${config.xdg.configHome}/pg/pgpass";
+    PGSERVICEFILE = "${config.xdg.configHome}/pg/pg_service.conf";
+    PSQLRC = "${config.xdg.configHome}/pg/psqlrc";
+    PSQL_HISTORY = "${config.xdg.cacheHome}/pg/psql_history";
+    PYTHON_EGG_CACHE = "${config.xdg.cacheHome}/python-eggs";
+    RUSTUP_HOME = "${config.xdg.dataHome}/rustup";
+    STACK_ROOT = "${config.xdg.dataHome}/stack";
   };
 
   nixpkgs.config.allowUnfree = true;
 
   programs.bash = {
     enable = true;
+    historyControl = ["erasedups" "ignoredups" "ignorespace"];
     historyFile = "$XDG_CACHE_HOME/bash/history";
     sessionVariables = { PROMPT_COMMAND = "history -a"; };
     shellAliases = {
-      # ls = "LC_COLLATE=C ls -F --color=always --group-directories-first --si";
-      ls = "exa";
+      ls = "exa -F --group-directories-first";
+      ll = "ls -lh --git";
+      la = "ll -a";
+      l = "la";
+      lt = "ll -T";
       cat = "bat";
     };
   };
@@ -73,7 +77,7 @@
 
   programs.neovim = {
     enable = true;
-    plugins = with pkgs.vimPlugins; [ ale rust-vim vim-nix vim-vue ];
+    plugins = with pkgs.vimPlugins; [ ale rust-vim vim-nix vim-vue typescript-vim ];
     extraConfig = builtins.readFile ./neovim.vim;
     viAlias = true;
     vimAlias = true;

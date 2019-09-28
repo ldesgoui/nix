@@ -1,20 +1,29 @@
-set nocompatible
-set expandtab
-set ruler
-set rulerformat=line\ %l\ char\ %c
-set hidden
-set tabstop=4
-set shiftwidth=4
-set mouse=""
-set list
-set listchars=tab:_\ ,trail:~
+set expandtab " tabs are spaces
+set hidden " keep buffers alive when hidden
+set lazyredraw " don't redraw when executing macros
+set nomodeline " disable modeline
+set nowrap " disable line wrap
+set number " show line numbers
+set shiftwidth=4 " how many spaces is >>
+set softtabstop=4 " how many spaces is <TAB> in insert
+set tabstop=4 " width of a tab
+
+" per filetype settings
+autocmd FileType html setlocal sw=2 sts=2 ts=2
+autocmd FileType javascript setlocal sw=2 sts=2 ts=2
+autocmd FileType json setlocal sw=2 sts=2 ts=2
+
+" make the matching paren less obnoxious
+highlight MatchParen ctermbg=none ctermfg=red
 
 let mapleader=","
 
+nnoremap ; :
+nnoremap <C-J> :bnext<CR>
+nnoremap <C-K> :bprev<CR>
+nnoremap <F1> <Nop>
+nnoremap Q <Nop>
 vnoremap <leader>s :!LC_ALL=C sort<CR>
-nnoremap <C-J> :bn<CR>
-nnoremap <C-K> :bp<CR>
-map Q <Nop>
 
 let g:ale_fix_on_save = 1
 let g:ale_lint_on_enter = 0

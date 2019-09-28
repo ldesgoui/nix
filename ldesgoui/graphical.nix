@@ -40,10 +40,10 @@ in
   ];
 
   home.sessionVariables = {
-    ICEAUTHORITY = "$XDG_CACHE_HOME/ICEauthority";
-    # XAUTHORITY = "$XDG_RUNTIME_DIR/Xauthority"; # breaks things
-    XCOMPOSECACHE = "$XDG_CACHE_HOME/X11/xcompose";
-    XCOMPOSEFILE = "$XDG_CONFIG_HOME/X11/xcompose";
+    ICEAUTHORITY = "${config.xdg.cacheHome}/ICEauthority";
+    # XAUTHORITY = "\${XDG_RUNTIME_DIR:-/run/user/\$(id -u)}/Xauthority"; # breaks stuff
+    XCOMPOSECACHE = "${config.xdg.cacheHome}/X11/xcompose";
+    XCOMPOSEFILE = "${config.xdg.configHome}/X11/xcompose";
   };
 
   programs.alacritty = {
@@ -53,12 +53,38 @@ in
       selection.save_to_clipboard = true;
       font.size = 12;
       font.normal.family = font;
+      window.padding = { x = 4; y = 4; };
+
+      colors = {
+        primary.background = "0x1d1f21";
+        primary.foreground = "0xc5c8c6";
+        cursor.text = "0x1d1f21";
+        cursor.cursor = "0xffffff";
+        normal.black = "0x1d1f21";
+        normal.red = "0xcc6666";
+        normal.green = "0xb5bd68";
+        normal.yellow = "0xe6c547";
+        normal.blue = "0x81a2be";
+        normal.magenta = "0xb294bb";
+        normal.cyan = "0x70c0ba";
+        normal.white = "0x373b41";
+        bright.black = "0x666666";
+        bright.red = "0xff3334";
+        bright.green = "0x9ec400";
+        bright.yellow = "0xf0c674";
+        bright.blue = "0x81a2be";
+        bright.magenta = "0xb77ee0";
+        bright.cyan = "0x54ced6";
+        bright.white = "0x282a2e";
+      };
     };
   };
 
   programs.feh.enable = true;
 
-  programs.firefox.enable = true;
+  programs.firefox = {
+    enable = true;
+  };
 
   programs.mpv.enable = true;
 
