@@ -5,11 +5,11 @@ let
   font =
     # "Andale Mono"
     # "Anonymous Pro"
-    "Cascadia Code"
+    # "Cascadia Code"
     # "Cousine"
     # "Cutive Mono"
     # "DejaVu Sans Mono"
-    # "Fira Mono"
+    "Fira Mono"
     # "IBM Plex Mono"
     # "Inconsolata"
     # "NovaMono"
@@ -26,6 +26,10 @@ in
   fonts.fontconfig.enable = true;
 
   home.packages = with pkgs; [
+    qt5.qtbase
+    chatterino2
+    streamlink
+
     corefonts
     dmenu
     emojione
@@ -33,7 +37,7 @@ in
     google-fonts
     iosevka
     maim
-    mumble
+    mumble_git
     pavucontrol
     vulkan-loader
     xclip
@@ -87,6 +91,11 @@ in
   };
 
   programs.mpv.enable = true;
+
+#  programs.obs-studio = {
+#    enable = true;
+#    plugins = [ pkgs.obs-linuxbrowser ];
+#  };
 
   programs.zathura.enable = true;
 

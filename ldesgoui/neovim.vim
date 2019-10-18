@@ -12,6 +12,7 @@ set tabstop=4 " width of a tab
 autocmd FileType html setlocal sw=2 sts=2 ts=2
 autocmd FileType javascript setlocal sw=2 sts=2 ts=2
 autocmd FileType json setlocal sw=2 sts=2 ts=2
+autocmd FileType vue setlocal sw=2 sts=2 ts=2
 
 " make the matching paren less obnoxious
 highlight MatchParen ctermbg=none ctermfg=red

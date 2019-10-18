@@ -32,7 +32,7 @@
 
   programs.bash = {
     enable = true;
-    historyControl = ["erasedups" "ignoredups" "ignorespace"];
+    historyControl = [ "erasedups" "ignoredups" "ignorespace" ];
     historyFile = "$XDG_CACHE_HOME/bash/history";
     sessionVariables = { PROMPT_COMMAND = "history -a"; };
     shellAliases = {
@@ -77,7 +77,14 @@
 
   programs.neovim = {
     enable = true;
-    plugins = with pkgs.vimPlugins; [ ale rust-vim vim-nix vim-vue typescript-vim ];
+    plugins = with pkgs.vimPlugins; [
+      ale
+      dhall-vim
+      rust-vim
+      typescript-vim
+      vim-nix
+      vim-vue
+    ];
     extraConfig = builtins.readFile ./neovim.vim;
     viAlias = true;
     vimAlias = true;
