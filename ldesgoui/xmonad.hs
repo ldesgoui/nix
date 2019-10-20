@@ -19,11 +19,11 @@ main = xmonad $ ewmh $ def
         , scratchpadManageHook $ center x y
         ]
     , modMask = mod4Mask
-    , terminal = "alacritty"
+    , terminal = "st"
     }
     `additionalKeysP`
     [ ("M-C-<Return>",  safeSpawn "xdg-open" ["http://"])
     , ("<Print>",       spawn "maim | xclip -t image/png -selection clipboard")
     , ("M-<Print>",     spawn "maim -s | xclip -t image/png -selection clipboard")
-    , ("M-`",           scratchpadSpawnActionCustom "alacritty --class scratchpad")
+    , ("M-`",           scratchpadSpawnActionCustom "st -n scratchpad")
     ]

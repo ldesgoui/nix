@@ -26,10 +26,6 @@ in
   fonts.fontconfig.enable = true;
 
   home.packages = with pkgs; [
-    qt5.qtbase
-    chatterino2
-    streamlink
-
     corefonts
     dmenu
     emojione
@@ -39,8 +35,45 @@ in
     maim
     mumble_git
     pavucontrol
+    streamlink
     vulkan-loader
     xclip
+
+    (
+      st.override {
+        patches = [
+          ./patches/st-fps1001.diff
+
+          (
+            # bit hacky :/
+            writeText "st-font.diff" ''
+              diff --git a/config.def.h b/config.def.h
+              index 0e01717..5df5eef 100644
+              --- a/config.def.h
+              +++ b/config.def.h
+              @@ -8 +8 @@
+              -static char *font = "Liberation Mono:pixelsize=12:antialias=true:autohint=true";
+              +static char *font = "${font}:size=12:antialias=true:autohint=true";
+            ''
+          )
+        ] ++ builtins.map fetchurl [
+          {
+            url = "https://st.suckless.org/patches/scrollback/st-scrollback-0.8.2.diff";
+            sha256 = "9c5aedce2ff191437bdb78aa70894c3c91a47e1be48465286f42d046677fd166";
+          }
+
+          {
+            url = "https://st.suckless.org/patches/scrollback/st-scrollback-mouse-0.8.2.diff";
+            sha256 = "6103a650f62b5d07672eee9e01e3f4062525083da6ba063e139ca7d9fd58a1ba";
+          }
+
+          {
+            url = "https://st.suckless.org/patches/dracula/st-dracula-0.8.2.diff";
+            sha256 = "5eb8e0375fda9373c3b16cabe2879027300e73e48dbd9782e54ffd859e84fb7e";
+          }
+        ];
+      }
+    )
   ];
 
   home.sessionVariables = {
@@ -92,11 +125,6 @@ in
 
   programs.mpv.enable = true;
 
-#  programs.obs-studio = {
-#    enable = true;
-#    plugins = [ pkgs.obs-linuxbrowser ];
-#  };
-
   programs.zathura.enable = true;
 
   services.dunst = {
@@ -114,6 +142,8 @@ in
 
     initExtra = ''
       xrandr -r 144
+      xset -dpms
+      xset r rate 250
     '';
 
     pointerCursor = {
@@ -126,6 +156,16 @@ in
       enableContribAndExtras = true;
     };
   };
+
+  xdg.configFile."streamlink/config".text = ''
+    default-stream=480p60,480p,720p60,720p,best
+    hls-live-edge=1
+    player=mpv --cache=no {filename}
+    twitch-disable-hosting
+    twitch-oauth-token=r6bzi0k4z0eurlmj6pyk44qytfsaq0
+  '';
+
+  xdg.configFile."streamlink/plugins/twitch.py".source = ./patches/streamlink-twitch.py;
 
   xdg.configFile."xmonad/xmonad.hs" = {
     source = ./xmonad.hs;
