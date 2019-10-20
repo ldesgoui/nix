@@ -9,14 +9,18 @@ let
     # "Cousine"
     # "Cutive Mono"
     # "DejaVu Sans Mono"
-    "Fira Mono"
+    # "Fantasque Sans Mono"
+    # "Fira Mono"
+    # "Hack"
     # "IBM Plex Mono"
     # "Inconsolata"
+    "Iosevka"
     # "NovaMono"
     # "PT Mono"
     # "Source Code Pro"
     # "Space Mono"
     # "Ubuntu Mono"
+    # "Victor Mono"
   ;
 
 in
@@ -26,54 +30,24 @@ in
   fonts.fontconfig.enable = true;
 
   home.packages = with pkgs; [
-    corefonts
     dmenu
-    emojione
     gimp
-    google-fonts
-    iosevka
     maim
     mumble_git
     pavucontrol
+    st-custom
     streamlink
     vulkan-loader
     xclip
-
-    (
-      st.override {
-        patches = [
-          ./patches/st-fps1001.diff
-
-          (
-            # bit hacky :/
-            writeText "st-font.diff" ''
-              diff --git a/config.def.h b/config.def.h
-              index 0e01717..5df5eef 100644
-              --- a/config.def.h
-              +++ b/config.def.h
-              @@ -8 +8 @@
-              -static char *font = "Liberation Mono:pixelsize=12:antialias=true:autohint=true";
-              +static char *font = "${font}:size=12:antialias=true:autohint=true";
-            ''
-          )
-        ] ++ builtins.map fetchurl [
-          {
-            url = "https://st.suckless.org/patches/scrollback/st-scrollback-0.8.2.diff";
-            sha256 = "9c5aedce2ff191437bdb78aa70894c3c91a47e1be48465286f42d046677fd166";
-          }
-
-          {
-            url = "https://st.suckless.org/patches/scrollback/st-scrollback-mouse-0.8.2.diff";
-            sha256 = "6103a650f62b5d07672eee9e01e3f4062525083da6ba063e139ca7d9fd58a1ba";
-          }
-
-          {
-            url = "https://st.suckless.org/patches/dracula/st-dracula-0.8.2.diff";
-            sha256 = "5eb8e0375fda9373c3b16cabe2879027300e73e48dbd9782e54ffd859e84fb7e";
-          }
-        ];
-      }
-    )
+  ] ++ # fonts
+  [
+    corefonts
+    emojione
+    fantasque-sans-mono
+    google-fonts
+    hack-font
+    iosevka
+    victor-mono
   ];
 
   home.sessionVariables = {
@@ -127,6 +101,39 @@ in
 
   programs.zathura.enable = true;
 
+  nixpkgs.config.packageOverrides = pkgs: {
+    st-custom =
+      pkgs.st.override {
+        patches = [
+          ./patches/st-fps1001.diff
+
+          (
+            pkgs.writeText "st-font.diff"
+              (
+                builtins.replaceStrings [ "FONT" ] [ font ]
+                  (builtins.readFile ./patches/st-font.diff)
+              )
+          )
+        ] ++ builtins.map pkgs.fetchurl [
+          {
+            url = "https://st.suckless.org/patches/scrollback/st-scrollback-0.8.2.diff";
+            sha256 = "9c5aedce2ff191437bdb78aa70894c3c91a47e1be48465286f42d046677fd166";
+          }
+
+          {
+            url = "https://st.suckless.org/patches/scrollback/st-scrollback-mouse-0.8.2.diff";
+            sha256 = "6103a650f62b5d07672eee9e01e3f4062525083da6ba063e139ca7d9fd58a1ba";
+          }
+
+          {
+            url = "https://st.suckless.org/patches/dracula/st-dracula-0.8.2.diff";
+            sha256 = "5eb8e0375fda9373c3b16cabe2879027300e73e48dbd9782e54ffd859e84fb7e";
+          }
+        ];
+      };
+  };
+
+
   services.dunst = {
     enable = true;
     settings.global = {
@@ -156,6 +163,10 @@ in
       enableContribAndExtras = true;
     };
   };
+
+  xdg.configFile."readline/inputrc".text = ''
+    set enable-keypad on
+  '';
 
   xdg.configFile."streamlink/config".text = ''
     default-stream=480p60,480p,720p60,720p,best

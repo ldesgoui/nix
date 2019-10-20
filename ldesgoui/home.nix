@@ -15,6 +15,7 @@
     GEM_HOME = "${config.xdg.dataHome}/gem";
     GEM_SPEC_CACHE = "${config.xdg.cacheHome}/gem";
     HTTPIE_CONFIG_DIR = "${config.xdg.configHome}/httpie";
+    INPUTRC = "${config.xdg.configHome}/readline/inputrc";
     LESSHISTFILE = "${config.xdg.cacheHome}/less/history";
     LESSKEY = "${config.xdg.configHome}/less/lesskey";
     NODE_REPL_HISTORY = "${config.xdg.dataHome}/node_repl_history";
@@ -106,6 +107,8 @@
 
   xdg = {
     enable = true;
+
+    # configFile."nixpkgs/config.nix".source = builtins.toString config.nixpkgs.config;
 
     configFile."npm/npmrc".text = ''
       prefix=''${XDG_DATA_HOME}/npm
