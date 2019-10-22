@@ -107,14 +107,17 @@
 
   xdg = {
     enable = true;
-
-    # configFile."nixpkgs/config.nix".source = builtins.toString config.nixpkgs.config;
-
-    configFile."npm/npmrc".text = ''
-      prefix=''${XDG_DATA_HOME}/npm
-      cache=''${XDG_CACHE_HOME}/npm
-      tmp=''${XDG_RUNTIME_DIR}/npm
-      init-module=''${XDG_CONFIG_HOME}/npm/config/npm-init.js
-    '';
   };
+
+  xdg.configFile."npm/npmrc".text = ''
+    prefix=''${XDG_DATA_HOME}/npm
+    cache=''${XDG_CACHE_HOME}/npm
+    tmp=''${XDG_RUNTIME_DIR}/npm
+    init-module=''${XDG_CONFIG_HOME}/npm/config/npm-init.js
+  '';
+
+  xdg.configFile."readline/inputrc".text = ''
+    $include /etc/inputrc
+    set enable-keypad on
+  '';
 }

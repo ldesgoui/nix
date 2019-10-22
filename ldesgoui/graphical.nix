@@ -130,10 +130,6 @@ in
     };
   };
 
-  xdg.configFile."readline/inputrc".text = ''
-    set enable-keypad on
-  '';
-
   xdg.configFile."streamlink/config".text = ''
     default-stream=480p60,480p,720p60,720p,best
     hls-live-edge=1
