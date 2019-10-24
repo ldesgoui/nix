@@ -32,8 +32,10 @@ in
   home.packages = with pkgs; [
     dmenu
     gimp
+    libnotify
     maim
     mumble_git
+    pamixer
     pavucontrol
     st-custom
     streamlink

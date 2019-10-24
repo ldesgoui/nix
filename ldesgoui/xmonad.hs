@@ -25,5 +25,7 @@ main = xmonad $ ewmh $ def
     [ ("M-C-<Return>",  safeSpawn "xdg-open" ["http://"])
     , ("<Print>",       spawn "maim | xclip -t image/png -selection clipboard")
     , ("M-<Print>",     spawn "maim -s | xclip -t image/png -selection clipboard")
+    , ("M-=",           spawn "pamixer -i 5 && notify-send -h string:x-canonical-private-synchronous:volume-notify Volume: $(pamixer --get-volume-human)")
+    , ("M--",           spawn "pamixer -d 5 && notify-send -h string:x-canonical-private-synchronous:volume-notify Volume: $(pamixer --get-volume-human)")
     , ("M-`",           scratchpadSpawnActionCustom "st -n scratchpad")
     ]
