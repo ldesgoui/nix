@@ -9,12 +9,12 @@ let
     # "Cousine"
     # "Cutive Mono"
     # "DejaVu Sans Mono"
-    # "Fantasque Sans Mono"
+    "Fantasque Sans Mono"
     # "Fira Mono"
     # "Hack"
     # "IBM Plex Mono"
     # "Inconsolata"
-    "Iosevka"
+    # "Iosevka"
     # "NovaMono"
     # "PT Mono"
     # "Source Code Pro"
@@ -94,8 +94,8 @@ in
           }
 
           {
-            url = "https://st.suckless.org/patches/dracula/st-dracula-0.8.2.diff";
-            sha256 = "5eb8e0375fda9373c3b16cabe2879027300e73e48dbd9782e54ffd859e84fb7e";
+            url = "https://st.suckless.org/patches/nordtheme/st-nordtheme-0.8.2.diff";
+            sha256 = "01de8a6d0d855c31496c7963e78edb7565a81b60dcb9e9f00dd3eab1f43b526b";
           }
         ];
       };
@@ -140,6 +140,7 @@ in
     twitch-oauth-token=r6bzi0k4z0eurlmj6pyk44qytfsaq0
   '';
 
+  # Until Low Latency Twitch is merged into streamlink
   xdg.configFile."streamlink/plugins/twitch.py".source = ./patches/streamlink-twitch.py;
 
   xdg.configFile."xmonad/xmonad.hs" = {

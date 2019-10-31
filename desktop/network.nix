@@ -26,4 +26,6 @@
   };
 
   services.openssh.enable = true;
+
+  services.wakeonlan.interfaces = [{ interface = "enp4s0"; }];
 }

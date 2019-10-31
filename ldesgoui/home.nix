@@ -2,7 +2,7 @@
 { config, pkgs, ... }:
 
 {
-  home.packages = with pkgs; [ exa ffmpeg file httpie p7zip ripgrep ];
+  home.packages = with pkgs; [ exa ffmpeg file httpie nixpkgs-fmt p7zip ripgrep youtube-dl ];
 
   home.sessionVariables = {
     PATH = "$PATH:$HOME/.local/bin";
@@ -48,8 +48,6 @@
 
   programs.bat.enable = true;
 
-  programs.broot.enable = true;
-
   programs.command-not-found.enable = true;
 
   programs.direnv.enable = true;
@@ -80,11 +78,13 @@
     enable = true;
     plugins = with pkgs.vimPlugins; [
       ale
-      dhall-vim
-      rust-vim
-      typescript-vim
-      vim-nix
-      vim-vue
+      vim-commentary
+      vim-eunuch
+      vim-fugitive
+      vim-polyglot
+      vim-sensible
+      vim-surround
+      vim-repeat
     ];
     extraConfig = builtins.readFile ./neovim.vim;
     viAlias = true;

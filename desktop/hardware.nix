@@ -38,7 +38,7 @@
   hardware = {
     cpu.intel.updateMicrocode = true;
 
-    enableAllFirmware = true;
+    enableRedistributableFirmware = true;
 
     opengl.driSupport32Bit = true;
 
