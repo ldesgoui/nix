@@ -28,5 +28,7 @@
 
   system.stateVersion = "18.09";
 
+  systemd.extraConfig = "DefaultTimeoutStopSec=10s";
+
   time.timeZone = "Europe/Paris";
 }
