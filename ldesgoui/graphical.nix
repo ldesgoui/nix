@@ -63,7 +63,6 @@ in
 
   programs.firefox = {
     enable = true;
-    profiles.ldesgoui = {};
   };
 
   programs.mpv.enable = true;

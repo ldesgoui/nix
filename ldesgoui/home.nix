@@ -2,7 +2,18 @@
 { config, pkgs, ... }:
 
 {
-  home.packages = with pkgs; [ exa ffmpeg file httpie nixpkgs-fmt p7zip ripgrep youtube-dl ];
+  imports = [ ./lorri.nix ];
+
+  home.packages = with pkgs; [
+    exa
+    ffmpeg
+    file
+    httpie
+    nixpkgs-fmt
+    p7zip
+    ripgrep
+    youtube-dl
+  ];
 
   home.sessionVariables = {
     PATH = "$PATH:$HOME/.local/bin";
@@ -103,6 +114,10 @@
         extraOptions.strictHostKeyChecking = "no";
       };
     };
+  };
+
+  services.lorri = {
+    enable = true;
   };
 
   xdg = {
