@@ -1,5 +1,7 @@
 # user.nix
 { ... }: {
+  fonts.fontconfig.penultimate.enable = true;
+
   hardware.pulseaudio.enable = true;
 
   nixpkgs.config.pulseaudio = true;
@@ -26,6 +28,8 @@
   };
 
   sound.enable = true;
+
+  # users.mutableUsers = false;
 
   users.users.ldesgoui = {
     extraGroups = [ "wheel" ];

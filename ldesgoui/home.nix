@@ -6,6 +6,7 @@
 
   home.packages = with pkgs; [
     exa
+    fd
     ffmpeg
     file
     httpie
@@ -37,6 +38,7 @@
     PSQL_HISTORY = "${config.xdg.cacheHome}/pg/psql_history";
     PYTHON_EGG_CACHE = "${config.xdg.cacheHome}/python-eggs";
     RUSTUP_HOME = "${config.xdg.dataHome}/rustup";
+    SQLITE_HISTORY = "${config.xdg.dataHome}/sqlite_history";
     STACK_ROOT = "${config.xdg.dataHome}/stack";
   };
 
@@ -45,7 +47,7 @@
   programs.bash = {
     enable = true;
     historyControl = [ "erasedups" "ignoredups" "ignorespace" ];
-    historyFile = "$XDG_CACHE_HOME/bash/history";
+    historyFile = "${config.xdg.dataHome}/bash/history";
     sessionVariables = { PROMPT_COMMAND = "history -a"; };
     shellAliases = {
       ls = "exa -F --group-directories-first";
