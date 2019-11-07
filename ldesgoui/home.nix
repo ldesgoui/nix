@@ -2,8 +2,6 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ ./lorri.nix ];
-
   home.packages = with pkgs; [
     exa
     fd
@@ -92,8 +90,6 @@
     plugins = with pkgs.vimPlugins; [
       ale
       vim-commentary
-      vim-eunuch
-      vim-fugitive
       vim-polyglot
       vim-sensible
       vim-surround
@@ -116,10 +112,6 @@
         extraOptions.strictHostKeyChecking = "no";
       };
     };
-  };
-
-  services.lorri = {
-    enable = true;
   };
 
   xdg = {

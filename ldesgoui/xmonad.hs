@@ -17,14 +17,14 @@ main =
           , scratchpadManageHook $ center (9 / 16) (9 / 9)
           ]
     , modMask = mod4Mask
-    , terminal = "st"
+    , terminal = "alacritty"
     } `additionalKeysP`
   [ ("M-C-<Return>",    spawn "xdg-open http://")
   , ("<Print>",         spawn "maim    | xclip -t image/png -selection clipboard")
   , ("M-<Print>",       spawn "maim -s | xclip -t image/png -selection clipboard")
   , ("M-=",             spawn "pamixer -i 5" *> spawn showVolume)
   , ("M--",             spawn "pamixer -d 5" *> spawn showVolume)
-  , ("M-`",             scratchpadSpawnActionCustom "st -n scratchpad")
+  , ("M-`",             scratchpadSpawnActionCustom "alacritty --class scratchpad")
   ]
   where
     center x y = W.RationalRect ((1 - x) / 2) ((1 - y) / 2) x y

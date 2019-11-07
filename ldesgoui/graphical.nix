@@ -25,7 +25,7 @@ let
 
 in
 {
-  imports = [ ./home.nix ];
+  imports = [ ./home.nix ./lorri.nix ];
 
   fonts.fontconfig.enable = true;
 
@@ -57,6 +57,15 @@ in
     # XAUTHORITY = "\${XDG_RUNTIME_DIR:-/run/user/\$(id -u)}/Xauthority"; # breaks stuff
     XCOMPOSECACHE = "${config.xdg.cacheHome}/X11/xcompose";
     XCOMPOSEFILE = "${config.xdg.configHome}/X11/xcompose";
+  };
+
+  programs.alacritty = {
+    enable = true;
+    settings = {
+      window.padding = { x = 4; y = 4; };
+      font = { normal.family = font; size = 12; };
+      selection.save_to_clipboard = true;
+    };
   };
 
   programs.feh.enable = true;
@@ -101,7 +110,6 @@ in
       };
   };
 
-
   services.dunst = {
     enable = true;
     settings.global = {
@@ -111,6 +119,8 @@ in
       horizontal_padding = 8;
     };
   };
+
+  services.lorri.enable = true;
 
   xsession = {
     enable = true;
