@@ -30,7 +30,7 @@
     INPUTRC = "${config.xdg.configHome}/readline/inputrc";
     LESSHISTFILE = "${config.xdg.cacheHome}/less/history";
     LESSKEY = "${config.xdg.configHome}/less/lesskey";
-    NODE_REPL_HISTORY = "${config.xdg.dataHome}/node_repl_history";
+    NODE_REPL_HISTORY = "${config.xdg.cacheHome}/node_repl_history";
     NPM_CONFIG_USERCONFIG = "${config.xdg.configHome}/npm/npmrc";
     PGPASSFILE = "${config.xdg.configHome}/pg/pgpass";
     PGSERVICEFILE = "${config.xdg.configHome}/pg/pg_service.conf";
@@ -38,7 +38,7 @@
     PSQL_HISTORY = "${config.xdg.cacheHome}/pg/psql_history";
     PYTHON_EGG_CACHE = "${config.xdg.cacheHome}/python-eggs";
     RUSTUP_HOME = "${config.xdg.dataHome}/rustup";
-    SQLITE_HISTORY = "${config.xdg.dataHome}/sqlite_history";
+    SQLITE_HISTORY = "${config.xdg.cacheHome}/sqlite_history";
     STACK_ROOT = "${config.xdg.dataHome}/stack";
   };
 
@@ -47,7 +47,7 @@
   programs.bash = {
     enable = true;
     historyControl = [ "erasedups" "ignoredups" "ignorespace" ];
-    historyFile = "${config.xdg.dataHome}/bash/history";
+    historyFile = "${config.xdg.cacheHome}/bash/history";
     sessionVariables = { PROMPT_COMMAND = "history -a"; };
     shellAliases = {
       ls = "exa -F --group-directories-first";
