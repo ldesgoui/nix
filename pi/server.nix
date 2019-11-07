@@ -39,9 +39,9 @@ in
     jails.DEFAULT = lib.mkForce ''
       enabled = true
       backend = systemd
-      bantime = 3600
-      findtime = 600
-      ignoreip = 127.0.0.1/8 192.168.0.0/8
+      bantime = 86400
+      findtime = 3600
+      ignoreip = 127.0.0.1/8 192.168.0.0/16 10.0.0.0/24
       maxretry = 5
     '';
 
