@@ -1,5 +1,5 @@
 { pkgs, ... }: {
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  # boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.consoleLogLevel = 7;
 
   boot.loader.generic-extlinux-compatible.enable = true;

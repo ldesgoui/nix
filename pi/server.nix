@@ -30,7 +30,7 @@ in
   security.acme.certs."home.ldesgoui.xyz" = {
     allowKeysForGroup = true;
     group = "acme";
-    postRun = "systemctl reload murmur.service";
+    postRun = "systemctl restart murmur.service";
   };
 
   services.fail2ban = {
@@ -116,7 +116,7 @@ in
     recommendedProxySettings = true;
     recommendedTlsSettings = true;
 
-    virtualHosts."88.166.173.16" = {
+    virtualHosts."82.64.186.138" = {
       default = true;
       extraConfig = "return 301 https://home.ldesgoui.xyz$request_uri;";
     };
