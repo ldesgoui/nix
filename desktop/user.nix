@@ -33,9 +33,13 @@
 
   users.users.ldesgoui = {
     extraGroups = [ "wheel" ];
-
     isNormalUser = true;
-
     uid = 4242;
+  };
+
+  users.users.streamer = {
+    extraGroups = [ "wheel" ];
+    isNormalUser = true;
+    uid = 6969;
   };
 }

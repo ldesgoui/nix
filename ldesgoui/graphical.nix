@@ -126,6 +126,7 @@ in
     enable = true;
 
     initExtra = ''
+      xsetroot -solid black
       xrandr -r 144
       xset -dpms
       xset r rate 250
@@ -143,7 +144,7 @@ in
   };
 
   xdg.configFile."streamlink/config".text = ''
-    default-stream=480p60,480p,720p60,720p,best
+    default-stream=best
     hls-live-edge=1
     player=mpv --cache=no {filename}
     twitch-disable-hosting
