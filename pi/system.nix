@@ -19,13 +19,6 @@
 
   services.journald.extraConfig = "MaxRetentionSec=1week";
 
-  swapDevices = [
-    {
-      device = "/var/swap";
-      size = 4096;
-    }
-  ];
-
   system.stateVersion = "19.03";
 
   time.timeZone = "Europe/Paris";

@@ -17,8 +17,7 @@ in
     certificateScheme = 3;
     domains = [ "ldesgoui.xyz" ];
     enable = true;
-    fqdn = "home.ldesgoui.xyz";
-    # localDnsResolver = false;
+    fqdn = "ldesgoui.xyz";
 
     loginAccounts."ldesgoui@ldesgoui.xyz" = {
       hashedPassword = import ../secrets/emailHashedPassword.nix;
@@ -27,7 +26,7 @@ in
     };
   };
 
-  security.acme.certs."home.ldesgoui.xyz" = {
+  security.acme.certs."ldesgoui.xyz" = {
     allowKeysForGroup = true;
     group = "acme";
     postRun = "systemctl restart murmur.service";
@@ -68,9 +67,9 @@ in
 
   services.murmur = {
     enable = true;
-    registerName = "home.ldesgoui.xyz";
-    sslCert = "/var/lib/acme/home.ldesgoui.xyz/fullchain.pem";
-    sslKey = "/var/lib/acme/home.ldesgoui.xyz/key.pem";
+    registerName = "ldesgoui.xyz";
+    sslCert = "/var/lib/acme/ldesgoui.xyz/fullchain.pem";
+    sslKey = "/var/lib/acme/ldesgoui.xyz/key.pem";
   };
 
   services.netdata = {
@@ -118,7 +117,7 @@ in
 
     virtualHosts."82.64.186.138" = {
       default = true;
-      extraConfig = "return 301 https://home.ldesgoui.xyz$request_uri;";
+      extraConfig = "return 301 https://ldesgoui.xyz$request_uri;";
     };
 
     virtualHosts."localhost" = {
@@ -129,13 +128,18 @@ in
       '';
     };
 
-    virtualHosts."home.ldesgoui.xyz" = {
+    virtualHosts."ldesgoui.xyz" = {
       enableACME = true;
       forceSSL = true;
-      root = "/var/www/home.ldesgoui.xyz";
+      root = "/var/www/ldesgoui.xyz";
     };
 
     virtualHosts."10.0.0.1" = {
+      locations."= /freebox".extraConfig = "return 301 /freebox/;";
+      locations."~ /freebox/(?<ndpath>.*)" = {
+        proxyPass = "http://192.168.0.254/$ndpath$is_args$args";
+      };
+
       locations."= /netdata".extraConfig = "return 301 /netdata/;";
       locations."~ /netdata/(?<ndpath>.*)" = {
         proxyPass = "http://127.0.0.1:19999/$ndpath$is_args$args";
