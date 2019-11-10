@@ -38,7 +38,7 @@ in
     jails.DEFAULT = lib.mkForce ''
       enabled = true
       backend = systemd
-      bantime = 86400
+      bantime = 7200
       findtime = 3600
       ignoreip = 127.0.0.1/8 192.168.0.0/16 10.0.0.0/24
       maxretry = 5
@@ -46,22 +46,12 @@ in
 
     jails.postfix = ''
       filter = postfix[mode=aggressive]
-      action = iptables[name=postfix, port=smtp, protocol=tcp]
+      action = iptables-allports[name=postfix, protocol=tcp]
     '';
 
     jails.dovecot = ''
       filter = dovecot[mode=aggressive]
-      action = iptables[name=dovecot, port=imap, protocol=tcp]
-    '';
-
-    jails.nginx-botsearch = ''
-      filter = nginx-botsearch
-      action = iptables[name=nginx-botsearch, port=http, protocol=tcp]
-    '';
-
-    jails.nginx-http-auth = ''
-      filter = nginx-http-auth
-      action = iptables[name=nginx-http-auth, port=http, protocol=tcp]
+      action = iptables-allports[name=dovecot, protocol=tcp]
     '';
   };
 
