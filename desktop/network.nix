@@ -19,7 +19,7 @@
 
           allowedIPs = [ "10.0.0.1" ];
 
-          endpoint = "home.ldesgoui.xyz:51820";
+          endpoint = "ldesgoui.xyz:51820";
         }
       ];
     };

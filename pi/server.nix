@@ -125,11 +125,6 @@ in
     };
 
     virtualHosts."10.0.0.1" = {
-      locations."= /freebox".extraConfig = "return 301 /freebox/;";
-      locations."~ /freebox/(?<ndpath>.*)" = {
-        proxyPass = "http://192.168.0.254/$ndpath$is_args$args";
-      };
-
       locations."= /netdata".extraConfig = "return 301 /netdata/;";
       locations."~ /netdata/(?<ndpath>.*)" = {
         proxyPass = "http://127.0.0.1:19999/$ndpath$is_args$args";
