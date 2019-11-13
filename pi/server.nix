@@ -71,15 +71,14 @@ in
 
     virtualHosts."82.64.186.138" = {
       default = true;
-      enableACME = true;
       globalRedirect = "ldesgoui.xyz";
-      serverAliases = [ "www.ldesgoui.xyz" "home.ldesgoui.xyz" ];
     };
 
     virtualHosts."ldesgoui.xyz" = {
       enableACME = true;
       forceSSL = true;
       root = "/var/www/ldesgoui.xyz";
+      serverAliases = [ "www.ldesgoui.xyz" "home.ldesgoui.xyz" ];
     };
   };
 
