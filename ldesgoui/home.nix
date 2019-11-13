@@ -67,7 +67,7 @@
 
   programs.git = {
     enable = true;
-    userEmail = "ldesgoui@gmail.com";
+    userEmail = "ldesgoui@ldesgoui.xyz";
     userName = "ldesgoui";
   };
 
@@ -103,14 +103,8 @@
   programs.ssh = {
     enable = true;
     matchBlocks = {
-      pi = { hostname = "10.0.0.1"; };
-      desktop = { hostname = "10.0.0.2"; };
-      nacl = {
-        hostname = "68.183.50.247";
-        port = 60022;
-        user = "citadel";
-        extraOptions.strictHostKeyChecking = "no";
-      };
+      pi.hostname = "10.0.0.1";
+      desktop.hostname = "10.0.0.2";
     };
   };
 
