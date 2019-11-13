@@ -62,42 +62,6 @@ in
     sslKey = "/var/lib/acme/ldesgoui.xyz/key.pem";
   };
 
-  services.netdata = {
-    enable = true;
-    config.global = {
-      "access log" = "syslog";
-      "error log" = "syslog";
-      "config directory" = let
-        dir = pkgs.runCommand "netdata-conf.d" {} ''
-          mkdir -p $out
-          cp -r ${pkgs.netdata}/lib/netdata/conf.d/* $out
-          chmod -R +w $out
-
-          cat > $out/health_alarm_notify.conf << END
-
-          SEND_EMAIL=YES
-          role_recipients_email[sysadmin]=root
-          role_recipients_email[domainadmin]=root
-          role_recipients_email[dba]=root
-          role_recipients_email[webmaster]=root
-          role_recipients_email[proxyadmin]=root
-          role_recipients_email[sitemgr]=root
-
-          SEND_SYSLOG=YES
-          role_recipients_syslog[sysadmin]=netdata
-          role_recipients_syslog[domainadmin]=netdata
-          role_recipients_syslog[dba]=netdata
-          role_recipients_syslog[webmaster]=netdata
-          role_recipients_syslog[proxyadmin]=netdata
-          role_recipients_syslog[sitemgr]=netdata
-
-          END
-        '';
-      in
-        "${dir}";
-    };
-  };
-
   services.nginx = {
     enable = true;
     recommendedGzipSettings = true;
@@ -107,33 +71,15 @@ in
 
     virtualHosts."82.64.186.138" = {
       default = true;
-      extraConfig = "return 301 https://ldesgoui.xyz$request_uri;";
-    };
-
-    virtualHosts."localhost" = {
-      locations."/stub_status".extraConfig = ''
-        stub_status;
-        allow 127.0.0.1;
-        deny all;
-      '';
+      enableACME = true;
+      globalRedirect = "ldesgoui.xyz";
+      serverAliases = [ "www.ldesgoui.xyz" "home.ldesgoui.xyz" ];
     };
 
     virtualHosts."ldesgoui.xyz" = {
       enableACME = true;
       forceSSL = true;
       root = "/var/www/ldesgoui.xyz";
-    };
-
-    virtualHosts."10.0.0.1" = {
-      locations."= /netdata".extraConfig = "return 301 /netdata/;";
-      locations."~ /netdata/(?<ndpath>.*)" = {
-        proxyPass = "http://127.0.0.1:19999/$ndpath$is_args$args";
-        extraConfig = ''
-          proxy_pass_request_headers on;
-          proxy_set_header Connection "keep-alive";
-          proxy_store off;
-        '';
-      };
     };
   };
 
