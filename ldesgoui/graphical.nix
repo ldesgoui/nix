@@ -25,7 +25,7 @@ let
 
 in
 {
-  imports = [ ./home.nix ./lorri.nix ];
+  imports = [ ./home.nix ];
 
   fonts.fontconfig.enable = true;
 
@@ -119,8 +119,6 @@ in
       horizontal_padding = 8;
     };
   };
-
-  services.lorri.enable = true;
 
   xsession = {
     enable = true;
