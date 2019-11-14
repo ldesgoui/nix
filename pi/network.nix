@@ -1,9 +1,5 @@
 { ... }: {
-  networking = {
-    hostName = "pi.home.ldesgoui.xyz";
-    nameservers =
-      [ "1.1.1.1" "1.0.0.1" "2606:4700:4700::1111" "2606:4700:4700::1001" ];
-  };
+  networking.hostName = "pi.home.ldesgoui.xyz";
 
   networking.firewall = {
     allowedTCPPorts = [ 80 443 64738 ];
