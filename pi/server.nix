@@ -58,6 +58,13 @@ in
   services.kresd = {
     enable = true;
     interfaces = [ "::1" "127.0.0.1" "10.0.0.1" ];
+    extraConfig = ''
+      modules = { "hints" }
+
+      hints["pi.wg0"] = "10.0.0.1"
+      hints["desktop.wg0"] = "10.0.0.2"
+      hints["op5.wg0"] = "10.0.0.3"
+    '';
   };
 
   services.murmur = {
@@ -84,6 +91,10 @@ in
       forceSSL = true;
       root = "/var/www/ldesgoui.xyz";
       serverAliases = [ "www.ldesgoui.xyz" "home.ldesgoui.xyz" ];
+    };
+
+    virtualHosts."pi.wg0" = {
+      locations."/ip".return = "200 $remote_addr";
     };
   };
 
