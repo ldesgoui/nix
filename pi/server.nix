@@ -94,6 +94,7 @@ in
     };
 
     virtualHosts."pi.wg0" = {
+      listen = [ { addr = "10.0.0.1"; port = 80; } ];
       locations."/ip".return = "200 $remote_addr";
     };
   };
