@@ -19,13 +19,6 @@
 
   services.journald.extraConfig = "MaxRetentionSec=1month";
 
-  swapDevices = [
-    {
-      device = "/var/swap";
-      size = 4096;
-    }
-  ];
-
   system.stateVersion = "18.09";
 
   systemd.extraConfig = "DefaultTimeoutStopSec=10s";

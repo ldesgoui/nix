@@ -43,6 +43,8 @@
     opengl.driSupport32Bit = true;
 
     pulseaudio.support32Bit = true;
+
+    steam-hardware.enable = true;
   };
 
   services.fstrim.enable = true;

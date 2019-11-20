@@ -146,7 +146,7 @@ in
     hls-live-edge=1
     player=mpv --cache=no {filename}
     twitch-disable-hosting
-    twitch-oauth-token=r6bzi0k4z0eurlmj6pyk44qytfsaq0
+    # twitch-oauth-token=r6bzi0k4z0eurlmj6pyk44qytfsaq0
   '';
 
   # Until Low Latency Twitch is merged into streamlink
