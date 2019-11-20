@@ -15,14 +15,21 @@ in
 
   mailserver = {
     certificateScheme = 3;
-    domains = [ "ldesgoui.xyz" ];
+    domains = [ "ldesgoui.xyz" "ascent.gg" ];
     enable = true;
     fqdn = "ldesgoui.xyz";
 
-    loginAccounts."ldesgoui@ldesgoui.xyz" = {
-      hashedPassword = import ../secrets/emailHashedPassword.nix;
-      catchAll = [ "ldesgoui.xyz" ];
-      aliases = [ "@pi.home.ldesgoui.xyz" "@home.ldesgoui.xyz" "@localhost" ];
+    loginAccounts = {
+      "ldesgoui@ldesgoui.xyz" = {
+        hashedPassword = import ../secrets/email/ldesgoui.nix;
+        catchAll = [ "ldesgoui.xyz" ];
+        aliases = [ "@pi.home.ldesgoui.xyz" "@home.ldesgoui.xyz" "@localhost" ];
+      };
+
+      "wyatt@ascent.gg" = {
+        hashedPassword = import ../secrets/email/wyatt.nix;
+        catchAll = [ "ascent.gg" ];
+      };
     };
   };
 
@@ -90,7 +97,7 @@ in
       enableACME = true;
       forceSSL = true;
       root = "/var/www/ldesgoui.xyz";
-      serverAliases = [ "www.ldesgoui.xyz" "home.ldesgoui.xyz" ];
+      serverAliases = [ "www.ldesgoui.xyz" ];
     };
 
     virtualHosts."pi.wg0" = {
