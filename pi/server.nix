@@ -17,7 +17,7 @@ in
     certificateScheme = 3;
     domains = [ "ldesgoui.xyz" "ascent.gg" ];
     enable = true;
-    fqdn = "ldesgoui.xyz";
+    fqdn = "82-64-186-138.subs.proxad.net";
 
     loginAccounts = {
       "ldesgoui@ldesgoui.xyz" = {
