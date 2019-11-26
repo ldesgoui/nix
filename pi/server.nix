@@ -96,8 +96,21 @@ in
     virtualHosts."ldesgoui.xyz" = {
       enableACME = true;
       forceSSL = true;
-      root = "/var/www/ldesgoui.xyz";
       serverAliases = [ "www.ldesgoui.xyz" ];
+
+      root = "/var/www/ldesgoui.xyz";
+
+      extraConfig = ''
+        add_header Strict-Transport-Security "Strict-Transport-Security: max-age=31536000; includeSubDomains";
+        add_header Expect-CT 'max-age=604800, report-uri="https://ldesgoui.report-uri.com/r/d/ct/enforce"';
+        add_header Feature-Policy "default 'self'";
+        add_header NEL '{"report_to": "default", "max_age": 31536000, "include_subdomains": true}';
+        add_header Referrer-Policy "strict-origin-when-cross-origin";
+        add_header Report-To '{"group": "default", "max_age": 31536000,"endpoints": [{"url": "https://ldesgoui.report-uri.com/a/d/g"}], "include_subdomains": true}';
+        add_header X-Content-Type-Options "nosniff";
+        add_header X-Frame-Options "DENY";
+        add_header X-Xss-Protection "1; mode=block; report=https://ldesgoui.report-uri.com/r/d/xss/enforce";
+      '';
     };
 
     virtualHosts."pi.wg0" = {
