@@ -47,7 +47,7 @@ in
       backend = systemd
       bantime = 7200
       findtime = 3600
-      ignoreip = 127.0.0.1/8 192.168.0.0/16 10.0.0.0/24
+      ignoreip = 127.0.0.1/8 192.168.0.0/16 10.0.0.0/24 ::1 fe80::/10 2a01:e0a:260:6380::/60
       maxretry = 5
     '';
 
