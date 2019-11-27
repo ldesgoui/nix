@@ -1,11 +1,18 @@
 { ... }: {
-  networking.hostName = "pi.home.ldesgoui.xyz";
-
   networking.firewall = {
     allowedTCPPorts = [ 80 443 64738 ];
     allowedUDPPorts = [ 51820 64738 ];
     trustedInterfaces = [ "wg0" ];
   };
+
+  networking.hostName = "pi.ldesgoui.xyz";
+
+  #networking.interfaces."eth0".ipv6.addresses = [
+  #  {
+  #    address = "2a01:e0a:260:6381::";
+  #    prefixLength = 64;
+  #  }
+  #];
 
   networking.nat = {
     enable = true;

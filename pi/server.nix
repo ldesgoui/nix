@@ -106,7 +106,7 @@ in
         add_header Feature-Policy "default 'self'";
         add_header NEL '{"report_to": "default", "max_age": 31536000, "include_subdomains": true}';
         add_header Referrer-Policy "strict-origin-when-cross-origin";
-        add_header Report-To '{"group": "default", "max_age": 31536000,"endpoints": [{"url": "https://ldesgoui.report-uri.com/a/d/g"}], "include_subdomains": true}';
+        add_header Report-To '{"group": "default", "max_age": 31536000, "endpoints": [{"url": "https://ldesgoui.report-uri.com/a/d/g"}], "include_subdomains": true}';
         add_header X-Content-Type-Options "nosniff";
         add_header X-Frame-Options "DENY";
         add_header X-Xss-Protection "1; mode=block; report=https://ldesgoui.report-uri.com/r/d/xss/enforce";
