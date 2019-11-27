@@ -101,7 +101,7 @@ in
       root = "/var/www/ldesgoui.xyz";
 
       extraConfig = ''
-        add_header Strict-Transport-Security "Strict-Transport-Security: max-age=31536000; includeSubDomains";
+        add_header Strict-Transport-Security "max-age=31536000; includeSubDomains";
         add_header Expect-CT 'max-age=604800, report-uri="https://ldesgoui.report-uri.com/r/d/ct/enforce"';
         add_header Feature-Policy "default 'self'";
         add_header NEL '{"report_to": "default", "max_age": 31536000, "include_subdomains": true}';
