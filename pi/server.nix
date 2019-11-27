@@ -23,7 +23,7 @@ in
       "ldesgoui@ldesgoui.xyz" = {
         hashedPassword = import ../secrets/email/ldesgoui.nix;
         catchAll = [ "ldesgoui.xyz" ];
-        aliases = [ "@pi.home.ldesgoui.xyz" "@home.ldesgoui.xyz" "@localhost" ];
+        aliases = [ "@pi.ldesgoui.xyz" "@localhost" ];
       };
 
       "wyatt@ascent.gg" = {
