@@ -7,12 +7,12 @@
 
   networking.hostName = "pi.ldesgoui.xyz";
 
-  #networking.interfaces."eth0".ipv6.addresses = [
-  #  {
-  #    address = "2a01:e0a:260:6381::";
-  #    prefixLength = 64;
-  #  }
-  #];
+  networking.interfaces."eth0".ipv6.addresses = [
+    {
+      address = "2a01:e0a:260:6380::";
+      prefixLength = 64;
+    }
+  ];
 
   networking.nat = {
     enable = true;
