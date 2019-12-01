@@ -49,5 +49,5 @@
 
   services.fstrim.enable = true;
 
-  services.xserver.videoDrivers = [ "amdgpu" ];
+  # services.xserver.videoDrivers = [ "amdgpu" ];
 }

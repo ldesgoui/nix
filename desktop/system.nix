@@ -7,11 +7,6 @@
 
     buildCores = 4;
 
-    gc = {
-      automatic = true;
-      options = "--delete-older-than 14d";
-    };
-
     maxJobs = 4;
   };
 

@@ -26,6 +26,11 @@ nnoremap <F1>       <Nop>
 nnoremap Q          <Nop>
 vnoremap <leader>s  :!LC_ALL=C sort<CR>
 
+nnoremap [a         :ALEPreviousWrap<CR>
+nnoremap ]a         :ALENextWrap<CR>
+nnoremap [A         :ALEFirst<CR>
+nnoremap ]A         :ALELast<CR>
+
 " Ale
 let g:ale_fix_on_save = 1
 let g:ale_lint_on_enter = 0
@@ -36,6 +41,7 @@ let g:ale_javascript_eslint_executable = "npx eslint"
 let g:ale_javascript_prettier_executable = "npx prettier"
 
 let g:ale_rust_cargo_use_clippy = 1
+let g:ale_rust_rustfmt_options = "--edition 2018"
 
 let g:ale_fixers            = { "*": ["remove_trailing_lines", "trim_whitespace"] }
 let g:ale_fixers.css        = ["prettier"]

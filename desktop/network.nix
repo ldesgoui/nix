@@ -1,7 +1,7 @@
 # network.nix
 { ... }: {
   networking = {
-    hostName = "desktop.home.ldesgoui.xyz";
+    hostName = "desktop.ldesgoui.xyz";
 
     nameservers = [ "10.0.0.1" ];
 
