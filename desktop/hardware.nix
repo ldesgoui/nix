@@ -49,5 +49,7 @@
 
   services.fstrim.enable = true;
 
+  services.ratbagd.enable = true;
+
   # services.xserver.videoDrivers = [ "amdgpu" ];
 }

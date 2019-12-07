@@ -18,7 +18,10 @@
 
     enable = true;
 
-    libinput.enable = true;
+    libinput = {
+      enable = true;
+      middleEmulation = false;
+    };
 
     windowManager.default = "xmonad";
 
