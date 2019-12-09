@@ -1,16 +1,12 @@
 # hardware.nix
 { pkgs, ... }: {
   boot = {
-    initrd = {
-      availableKernelModules = [ "xhci_pci" "ahci" "usbhid" "sd_mod" ];
-      kernelModules = [];
-    };
-
-    extraModulePackages = [];
+    initrd.availableKernelModules = [ "xhci_pci" "ahci" "usbhid" "sd_mod" ];
 
     kernelModules = [ "kvm-intel" ];
     kernelPackages = pkgs.linuxPackages_latest;
     kernelParams = [
+      "quiet"
       "radeon.si_support=0"
       "amdgpu.si_support=1"
       "radeon.cik_support=0"
@@ -20,6 +16,7 @@
     loader = {
       efi.canTouchEfiVariables = true;
       systemd-boot.enable = true;
+      timeout = 1;
     };
   };
 

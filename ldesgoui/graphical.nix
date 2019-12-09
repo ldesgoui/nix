@@ -29,7 +29,17 @@ in
 
   fonts.fontconfig.enable = true;
 
+  gtk = {
+    enable = true;
+    font.name = "${font} 11";
+    theme = {
+      package = pkgs.stilo-themes;
+      name = "Stilo-dark";
+    };
+  };
+
   home.packages = with pkgs; [
+    aria2
     dmenu
     gimp
     libnotify
@@ -70,9 +80,7 @@ in
 
   programs.feh.enable = true;
 
-  programs.firefox = {
-    enable = true;
-  };
+  programs.firefox.enable = true;
 
   programs.mpv.enable = true;
 
@@ -146,7 +154,6 @@ in
     hls-live-edge=1
     player=mpv --cache=no {filename}
     twitch-disable-hosting
-    # twitch-oauth-token=r6bzi0k4z0eurlmj6pyk44qytfsaq0
   '';
 
   # Until Low Latency Twitch is merged into streamlink
