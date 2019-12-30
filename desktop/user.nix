@@ -16,14 +16,14 @@
       user = "ldesgoui";
     };
 
+    displayManager.defaultSession = "none+xmonad";
+
     enable = true;
 
     libinput = {
       enable = true;
       middleEmulation = false;
     };
-
-    windowManager.default = "xmonad";
 
     windowManager.xmonad.enable = true;
 
