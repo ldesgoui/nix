@@ -15,7 +15,7 @@
   ];
 
   home.sessionVariables = {
-    PATH = "$PATH:$HOME/.local/bin";
+    PATH = "$HOME/.local/bin:$PATH";
     EDITOR = "nvim";
 
     BUNDLE_USER_CACHE = "${config.xdg.cacheHome}/bundle";
