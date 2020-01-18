@@ -47,7 +47,6 @@ in
     mumble_git
     pamixer
     pavucontrol
-    st-custom
     streamlink
     vulkan-loader
     xclip
@@ -73,7 +72,7 @@ in
     enable = true;
     settings = {
       window.padding = { x = 4; y = 4; };
-      font = { normal.family = font; size = 12; };
+      font = { normal.family = font; size = 10; };
       selection.save_to_clipboard = true;
     };
   };
@@ -85,38 +84,6 @@ in
   programs.mpv.enable = true;
 
   programs.zathura.enable = true;
-
-  nixpkgs.config.packageOverrides = pkgs: {
-    st-custom =
-      pkgs.st.override {
-        patches = [
-          ./patches/st-fps1001.diff
-
-          (
-            pkgs.writeText "st-font.diff"
-              (
-                builtins.replaceStrings [ "FONT" ] [ font ]
-                  (builtins.readFile ./patches/st-font.diff)
-              )
-          )
-        ] ++ builtins.map pkgs.fetchurl [
-          {
-            url = "https://st.suckless.org/patches/scrollback/st-scrollback-0.8.2.diff";
-            sha256 = "9c5aedce2ff191437bdb78aa70894c3c91a47e1be48465286f42d046677fd166";
-          }
-
-          {
-            url = "https://st.suckless.org/patches/scrollback/st-scrollback-mouse-0.8.2.diff";
-            sha256 = "6103a650f62b5d07672eee9e01e3f4062525083da6ba063e139ca7d9fd58a1ba";
-          }
-
-          {
-            url = "https://st.suckless.org/patches/nordtheme/st-nordtheme-0.8.2.diff";
-            sha256 = "01de8a6d0d855c31496c7963e78edb7565a81b60dcb9e9f00dd3eab1f43b526b";
-          }
-        ];
-      };
-  };
 
   services.dunst = {
     enable = true;
