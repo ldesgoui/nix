@@ -40,6 +40,7 @@ in
 
   home.packages = with pkgs; [
     aria2
+    chatterino2
     dmenu
     gimp
     libnotify
@@ -67,6 +68,14 @@ in
     XCOMPOSECACHE = "${config.xdg.cacheHome}/X11/xcompose";
     XCOMPOSEFILE = "${config.xdg.configHome}/X11/xcompose";
   };
+
+  nixpkgs.overlays = [
+    (
+      self: super: {
+        chatterino2 = super.libsForQt5.callPackage ./packages/chatterino2.nix {};
+      }
+    )
+  ];
 
   programs.alacritty = {
     enable = true;
