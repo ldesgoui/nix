@@ -33,12 +33,6 @@ in
     };
   };
 
-  security.acme.certs."ldesgoui.xyz" = {
-    allowKeysForGroup = true;
-    group = "acme";
-    postRun = "systemctl restart murmur.service";
-  };
-
   services.fail2ban = {
     enable = true;
 
@@ -72,13 +66,6 @@ in
       hints["desktop.wg0"] = "10.0.0.2"
       hints["op5.wg0"] = "10.0.0.3"
     '';
-  };
-
-  services.murmur = {
-    enable = true;
-    registerName = "ldesgoui.xyz";
-    sslCert = "/var/lib/acme/ldesgoui.xyz/fullchain.pem";
-    sslKey = "/var/lib/acme/ldesgoui.xyz/key.pem";
   };
 
   services.nginx = {
@@ -118,6 +105,4 @@ in
       locations."/ip".return = "200 $remote_addr";
     };
   };
-
-  users.groups.acme.members = [ "murmur" ];
 }
