@@ -44,6 +44,7 @@ let g:ale_rust_cargo_use_clippy = 1
 let g:ale_rust_rustfmt_options = "--edition 2018"
 
 let g:ale_fixers            = { "*": ["remove_trailing_lines", "trim_whitespace"] }
+let g:ale_fixers.c          = ["clang-format"]
 let g:ale_fixers.css        = ["prettier"]
 let g:ale_fixers.elm        = ["elm-format"]
 let g:ale_fixers.graphql    = ["prettier"]

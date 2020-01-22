@@ -1,9 +1,0 @@
-diff --git a/config.def.h b/config.def.h
-index 0e01717..b9e4647 100644
---- a/config.def.h
-+++ b/config.def.h
-@@ -45,2 +45,2 @@ int allowaltscreen = 1;
--static unsigned int xfps = 120;
--static unsigned int actionfps = 30;
-+static unsigned int xfps = 1001;
-+static unsigned int actionfps = 1001;
