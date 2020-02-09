@@ -14,7 +14,8 @@ let
     # "Hack"
     # "IBM Plex Mono"
     # "Inconsolata"
-    "Iosevka"
+    # "Iosevka"
+    "Iosevka Fira"
     # "NovaMono"
     # "PT Mono"
     # "Source Code Pro"
@@ -59,10 +60,12 @@ in
     google-fonts
     hack-font
     iosevka
+    iosevka-fira
     victor-mono
   ];
 
   home.sessionVariables = {
+    GIT_ASKPASS = "";
     ICEAUTHORITY = "${config.xdg.cacheHome}/ICEauthority";
     # XAUTHORITY = "\${XDG_RUNTIME_DIR:-/run/user/\$(id -u)}/Xauthority"; # breaks stuff
     XCOMPOSECACHE = "${config.xdg.cacheHome}/X11/xcompose";
@@ -73,6 +76,14 @@ in
     (
       self: super: {
         chatterino2 = super.libsForQt5.callPackage ./packages/chatterino2.nix {};
+
+        iosevka-fira = super.iosevka.override {
+          set = "fira";
+          privateBuildPlan = {
+            family = "Iosevka Fira";
+            design = [ "ss05" ];
+          };
+        };
       }
     )
   ];
@@ -81,7 +92,7 @@ in
     enable = true;
     settings = {
       window.padding = { x = 4; y = 4; };
-      font = { normal.family = font; size = 10; };
+      font = { normal.family = font; size = 12; };
       selection.save_to_clipboard = true;
     };
   };
@@ -93,6 +104,13 @@ in
   programs.mpv.enable = true;
 
   programs.zathura.enable = true;
+
+  services.compton = {
+    enable = true;
+    extraOptions = ''
+      inactive-dim = 0.2;
+    '';
+  };
 
   services.dunst = {
     enable = true;
@@ -128,9 +146,13 @@ in
   xdg.configFile."streamlink/config".text = ''
     default-stream=best
     hls-live-edge=1
-    player=mpv --cache=no {filename}
+    player=mpv -af=lavfi=[dynaudnorm=f=10] --cache=no {filename}
     twitch-disable-hosting
   '';
+
+  # https://github.com/rycee/home-manager/pull/510
+  xdg.dataFile."dbus-1/services/ca.desrt.dconf.service".source =
+    "${pkgs.gnome3.dconf}/share/dbus-1/services/ca.desrt.dconf.service";
 
   # Until Low Latency Twitch is merged into streamlink
   xdg.configFile."streamlink/plugins/twitch.py".source = ./patches/streamlink-twitch.py;

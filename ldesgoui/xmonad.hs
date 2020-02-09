@@ -10,11 +10,13 @@ main =
   def
     { borderWidth = 0
     , handleEventHook = fullscreenEventHook
+    , layoutHook = tiled ||| Mirror tiled ||| Full
     , manageHook =
         composeAll
-          [ title       =? "eia3de"   --> doFloat
-          , className   =? "Steam"    --> doFloat
-          , scratchpadManageHook $ center (9 / 16) (9 / 9)
+          [ title       =? "eia3de"     --> doFloat
+          , className   =? "Steam"      --> doFloat
+          , className   =? "chatterino" --> doFloat
+          , scratchpadManageHook $ center (30 / 50) (45 / 50)
           ]
     , modMask = mod4Mask
     , terminal = "alacritty"
@@ -27,6 +29,7 @@ main =
   , ("M-`",             scratchpadSpawnActionCustom "alacritty --class scratchpad")
   ]
   where
+    tiled = Tall 1 (1 / 50) (1 / 2)
     center x y = W.RationalRect ((1 - x) / 2) ((1 - y) / 2) x y
     showVolume =
       unwords

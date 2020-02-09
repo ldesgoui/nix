@@ -4,7 +4,7 @@
     initrd.availableKernelModules = [ "xhci_pci" "ahci" "usbhid" "sd_mod" ];
 
     kernelModules = [ "kvm-intel" ];
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.linuxPackages_testing;
     kernelParams = [
       "quiet"
       "radeon.si_support=0"
@@ -46,7 +46,7 @@
 
   services.fstrim.enable = true;
 
-  services.ratbagd.enable = true;
+  # services.ratbagd.enable = true;
 
   # services.xserver.videoDrivers = [ "amdgpu" ];
 }

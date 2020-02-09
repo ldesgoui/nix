@@ -69,6 +69,7 @@
     enable = true;
     userEmail = "ldesgoui@ldesgoui.xyz";
     userName = "ldesgoui";
+    ignores = [ ".envrc" "shell.nix" ];
   };
 
   programs.htop = {

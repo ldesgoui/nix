@@ -1,5 +1,5 @@
 # user.nix
-{ ... }: {
+{ pkgs, ... }: {
   fonts.fontconfig.penultimate.enable = true;
 
   hardware.pulseaudio.enable = true;
@@ -7,6 +7,9 @@
   nixpkgs.config.pulseaudio = true;
 
   programs.bash.enableCompletion = true;
+
+  # https://github.com/rycee/home-manager/pull/510
+  services.dbus.packages = [ pkgs.gnome3.dconf ];
 
   services.xserver = {
     desktopManager.xterm.enable = false;
