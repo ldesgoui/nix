@@ -40,6 +40,7 @@ let g:ale_lint_on_text_changed = "never"
 let g:ale_javascript_eslint_executable = "npx eslint"
 let g:ale_javascript_prettier_executable = "npx prettier"
 
+let g:ale_rust_cargo_check_all_targets = 1
 let g:ale_rust_cargo_use_clippy = 1
 let g:ale_rust_rustfmt_options = "--edition 2018"
 

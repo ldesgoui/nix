@@ -101,7 +101,13 @@ in
 
   programs.firefox.enable = true;
 
-  programs.mpv.enable = true;
+  programs.mpv = {
+    enable = true;
+
+    config = {
+      input-default-bindings = false;
+    };
+  };
 
   programs.zathura.enable = true;
 
