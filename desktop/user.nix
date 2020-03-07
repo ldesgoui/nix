@@ -14,9 +14,12 @@
   services.xserver = {
     desktopManager.xterm.enable = false;
 
-    displayManager.auto = {
+    displayManager.lightdm = {
       enable = true;
-      user = "ldesgoui";
+      autoLogin = {
+        enable = true;
+        user = "ldesgoui";
+      };
     };
 
     displayManager.defaultSession = "none+xmonad";

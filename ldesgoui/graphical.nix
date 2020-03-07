@@ -11,11 +11,11 @@ let
     # "DejaVu Sans Mono"
     # "Fantasque Sans Mono"
     # "Fira Mono"
-    # "Hack"
+    "Hack"
     # "IBM Plex Mono"
     # "Inconsolata"
     # "Iosevka"
-    "Iosevka Fira"
+    # "Iosevka Fira"
     # "NovaMono"
     # "PT Mono"
     # "Source Code Pro"
@@ -91,9 +91,9 @@ in
   programs.alacritty = {
     enable = true;
     settings = {
-      window.padding = { x = 4; y = 4; };
       font = { normal.family = font; size = 12; };
       selection.save_to_clipboard = true;
+      window.padding = { x = 4; y = 4; };
     };
   };
 
@@ -110,13 +110,6 @@ in
   };
 
   programs.zathura.enable = true;
-
-  services.compton = {
-    enable = true;
-    extraOptions = ''
-      inactive-dim = 0.2;
-    '';
-  };
 
   services.dunst = {
     enable = true;

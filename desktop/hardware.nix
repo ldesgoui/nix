@@ -4,7 +4,7 @@
     initrd.availableKernelModules = [ "xhci_pci" "ahci" "usbhid" "sd_mod" ];
 
     kernelModules = [ "kvm-intel" ];
-    kernelPackages = pkgs.linuxPackages_testing;
+    kernelPackages = pkgs.linuxPackages_latest;
     kernelParams = [
       "quiet"
       "radeon.si_support=0"

@@ -2,13 +2,13 @@
 
 mkDerivation rec {
   pname = "chatterino2";
-  version = "nightly-build";
+  version = "nightly";
 
   src = fetchFromGitHub {
     owner = "Chatterino";
     repo = pname;
-    sha256 = "00sldsf8g0z94qc27rp32l411247b4dpxm04qq1nwhsz2as4v59i";
-    rev = version;
+    rev = "github-actions-nightly";
+    sha256 = "01qa57168shrpnwn8n07zdz1pyv6i9b7hqdi2bbvqv3kwigi5nrc";
     fetchSubmodules = true;
   };
 

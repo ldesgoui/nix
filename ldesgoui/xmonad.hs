@@ -22,8 +22,8 @@ main =
     , terminal = "alacritty"
     } `additionalKeysP`
   [ ("M-C-<Return>",    spawn "xdg-open http://")
-  , ("<Print>",         spawn "maim    | xclip -t image/png -selection clipboard")
-  , ("M-<Print>",       spawn "maim -s | xclip -t image/png -selection clipboard")
+  , ("<Print>",         spawn "maim     | xclip -t image/png -selection clipboard")
+  , ("M-<Print>",       spawn "maim -us | xclip -t image/png -selection clipboard")
   , ("M-=",             spawn "pamixer -i 5" *> spawn showVolume)
   , ("M--",             spawn "pamixer -d 5" *> spawn showVolume)
   , ("M-`",             scratchpadSpawnActionCustom "alacritty --class scratchpad")
