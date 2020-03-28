@@ -1,5 +1,4 @@
 { lib, pkgs, ... }:
-
 let
   snm =
     builtins.fetchTarball {
@@ -33,6 +32,11 @@ in
     };
   };
 
+  security.acme = {
+    acceptTerms = true;
+    email = "ldesgoui@gmail.com";
+  };
+
   services.fail2ban = {
     enable = true;
 
@@ -58,7 +62,7 @@ in
 
   services.kresd = {
     enable = true;
-    interfaces = [ "::1" "127.0.0.1" "10.0.0.1" ];
+    listenPlain = [ "[::1]:53" "127.0.0.1:53" "10.0.0.1:53" ];
     extraConfig = ''
       modules = { "hints" }
 
