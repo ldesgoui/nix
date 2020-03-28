@@ -1,6 +1,5 @@
 # graphical.nix
 { pkgs, config, ... }:
-
 let
   font =
     # "Andale Mono"
@@ -23,7 +22,6 @@ let
     # "Ubuntu Mono"
     # "Victor Mono"
   ;
-
 in
 {
   imports = [ ./home.nix ];
@@ -38,6 +36,10 @@ in
       name = "Stilo-dark";
     };
   };
+
+  home.keyboard.options = [
+    "compose:ralt"
+  ];
 
   home.packages = with pkgs; [
     aria2
