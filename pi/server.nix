@@ -4,7 +4,7 @@ let
     builtins.fetchTarball {
       url = (
         "https://gitlab.com/simple-nixos-mailserver/nixos-mailserver"
-        + "/-/archive/v2.2.1/nixos-mailserver-v2.2.1.tar.gz"
+        + "/-/archive/v2.3.0/nixos-mailserver-v2.3.0.tar.gz"
       );
       sha256 = "03d49v8qnid9g9rha0wg2z6vic06mhp0b049s3whccn1axvs2zzx";
     };
@@ -41,7 +41,6 @@ in
     enable = true;
 
     jails.DEFAULT = lib.mkForce ''
-      enabled = true
       backend = systemd
       bantime = 7200
       findtime = 3600
@@ -50,11 +49,13 @@ in
     '';
 
     jails.postfix = ''
+      enabled = true
       filter = postfix[mode=aggressive]
       action = iptables-allports[name=postfix, protocol=tcp]
     '';
 
     jails.dovecot = ''
+      enabled = true
       filter = dovecot[mode=aggressive]
       action = iptables-allports[name=dovecot, protocol=tcp]
     '';
@@ -62,7 +63,8 @@ in
 
   services.kresd = {
     enable = true;
-    listenPlain = [ "[::1]:53" "127.0.0.1:53" "10.0.0.1:53" ];
+    listenPlain = [ "127.0.0.1:53" "10.0.0.1:53" ];
+    listenTLS = [ "127.0.0.1:853" "10.0.0.1:853" ];
     extraConfig = ''
       modules = { "hints" }
 
