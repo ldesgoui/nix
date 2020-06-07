@@ -6,11 +6,12 @@ let
     # "Anonymous Pro"
     # "Cascadia Code"
     # "Cousine"
-    # "Cutive Mono"
+    # "Cozette"
+    ## "Cutive Mono"
     # "DejaVu Sans Mono"
     # "Fantasque Sans Mono"
-    # "Fira Mono"
-    "Hack"
+    "Fira Mono"
+    # "Hack"
     # "IBM Plex Mono"
     # "Inconsolata"
     # "Iosevka"
@@ -57,6 +58,7 @@ in
   ] ++ # fonts
   [
     corefonts
+    cozette
     emojione
     fantasque-sans-mono
     google-fonts
@@ -105,6 +107,16 @@ in
 
   programs.mpv = {
     enable = true;
+
+    bindings = {
+      "Alt+-" = "add video-zoom -0.1";
+      "Alt+=" = "add video-zoom 0.1";
+      "Alt+UP" = "add video-pan-y 0.01";
+      "Alt+DOWN" = "add video-pan-y -0.01";
+      "Alt+LEFT" = "add video-pan-x 0.01";
+      "Alt+RIGHT" = "add video-pan-x -0.01";
+      "Alt+BS" = "set video-zoom 0; set video-pan-x 0; set video-pan-y 0";
+    };
 
     config = {
       input-default-bindings = false;

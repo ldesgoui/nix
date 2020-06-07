@@ -9,10 +9,13 @@ set softtabstop=4   " how many spaces is <TAB> in insert
 set tabstop=4       " width of a tab
 
 " per filetype settings
+autocmd FileType c          setlocal sw=2 sts=2 ts=2
+autocmd FileType c++        setlocal sw=2 sts=2 ts=2
 autocmd FileType html       setlocal sw=2 sts=2 ts=2
 autocmd FileType javascript setlocal sw=2 sts=2 ts=2
 autocmd FileType json       setlocal sw=2 sts=2 ts=2
 autocmd FileType vue        setlocal sw=2 sts=2 ts=2
+autocmd FileType spice      setlocal filetype=cpp
 
 " make stuff less obnoxious
 highlight MatchParen ctermbg=none ctermfg=red
@@ -47,6 +50,7 @@ let g:ale_rust_rustfmt_options = "--edition 2018"
 
 let g:ale_fixers            = { "*": ["remove_trailing_lines", "trim_whitespace"] }
 let g:ale_fixers.c          = ["clang-format"]
+let g:ale_fixers.cpp        = ["clang-format"]
 let g:ale_fixers.css        = ["prettier"]
 let g:ale_fixers.elm        = ["elm-format"]
 let g:ale_fixers.graphql    = ["prettier"]

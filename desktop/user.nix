@@ -1,6 +1,10 @@
 # user.nix
 { pkgs, ... }: {
-  fonts.fontconfig.penultimate.enable = true;
+  fonts.fontconfig = {
+    allowBitmaps = true;
+    useEmbeddedBitmaps = true;
+    penultimate.enable = true;
+  };
 
   hardware.pulseaudio.enable = true;
 
