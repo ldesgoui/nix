@@ -15,7 +15,8 @@ main =
         composeAll
           [ title       =? "eia3de"     --> doFloat
           , className   =? "Steam"      --> doFloat
-          , className   =? "chatterino" --> doFloat
+          , className   =? "Ghidra"     --> doFloat
+          , className   =? "Gimp"       --> doFloat
           , scratchpadManageHook $ center (30 / 50) (45 / 50)
           ]
     , modMask = mod4Mask
