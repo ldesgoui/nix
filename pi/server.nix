@@ -6,7 +6,7 @@ let
         "https://gitlab.com/simple-nixos-mailserver/nixos-mailserver"
         + "/-/archive/v2.3.0/nixos-mailserver-v2.3.0.tar.gz"
       );
-      sha256 = "03d49v8qnid9g9rha0wg2z6vic06mhp0b049s3whccn1axvs2zzx";
+      sha256 = "0lpz08qviccvpfws2nm83n7m2r8add2wvfg9bljx9yxx8107r919";
     };
 in
 {
@@ -35,6 +35,12 @@ in
   security.acme = {
     acceptTerms = true;
     email = "ldesgoui@gmail.com";
+
+    certs."ldesgoui.xyz" = {
+      allowKeysForGroup = true;
+      group = "acme";
+      postRun = "systemctl restart murmur.service";
+    };
   };
 
   services.fail2ban = {
@@ -74,6 +80,17 @@ in
     '';
   };
 
+
+  services.murmur = {
+    enable = true;
+    bandwidth = 320000;
+    imgMsgLength = 1024 * 1024 * 10;
+    registerName = "ldesgoui.xyz";
+    sslCert = "/var/lib/acme/ldesgoui.xyz/fullchain.pem";
+    sslKey = "/var/lib/acme/ldesgoui.xyz/key.pem";
+    welcometext = "[W̲̅E̲̅L̲̅C̲̅O̲̅M̲̅E̲̅·̲̅T̲̅O̲̅·̲̅T̲̅H̲̅E̲̅·̲̅M̲̅U̲̅M̲̅B̲̅L̲̅E̲̅·̲̅S̲̅E̲̅R̲̅V̲̅E̲̅R̲̅]";
+  };
+
   services.nginx = {
     enable = true;
     recommendedGzipSettings = true;
@@ -111,4 +128,6 @@ in
       locations."/ip".return = "200 $remote_addr";
     };
   };
+
+  users.groups.acme.members = [ "murmur" ];
 }

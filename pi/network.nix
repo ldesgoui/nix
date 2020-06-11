@@ -5,7 +5,10 @@
     trustedInterfaces = [ "wg0" ];
   };
 
-  networking.hostName = "pi.ldesgoui.xyz";
+  networking = {
+    domain = "ldesgoui.xyz";
+    hostName = "pi";
+  };
 
   networking.interfaces."eth0".ipv6.addresses = [
     {
