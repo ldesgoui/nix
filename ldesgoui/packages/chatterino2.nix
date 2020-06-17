@@ -1,4 +1,14 @@
-{ stdenv, pkgconfig, fetchFromGitHub, qtbase, qtsvg, qtmultimedia, qmake, boost, openssl, mkDerivation }:
+{ stdenv
+, pkgconfig
+, fetchFromGitHub
+, qtbase
+, qtsvg
+, qtmultimedia
+, qmake
+, boost
+, openssl
+, mkDerivation
+}:
 
 mkDerivation rec {
   pname = "chatterino2";
@@ -8,7 +18,7 @@ mkDerivation rec {
     owner = "Chatterino";
     repo = pname;
     rev = "github-actions-nightly";
-    sha256 = "01qa57168shrpnwn8n07zdz1pyv6i9b7hqdi2bbvqv3kwigi5nrc";
+    sha256 = "0z66pqv26mgp39jidydkkcfcghzfpwia1nnpa11n08bbsy5rc2q5";
     fetchSubmodules = true;
   };
 

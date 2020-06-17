@@ -9,7 +9,6 @@
     file
     httpie
     nixpkgs-fmt
-    p7zip
     ripgrep
     youtube-dl
   ];
@@ -67,7 +66,7 @@
 
   programs.git = {
     enable = true;
-    userEmail = "ldesgoui@ldesgoui.xyz";
+    userEmail = "ldesgoui@gmail.com";
     userName = "ldesgoui";
     ignores = [ ".envrc" "shell.nix" ];
   };

@@ -1,28 +1,31 @@
 # graphical.nix
 { pkgs, config, ... }:
 let
-  font =
-    # "Andale Mono"
-    # "Anonymous Pro"
-    # "Cascadia Code"
-    # "Cousine"
-    # "Cozette"
-    ## "Cutive Mono"
-    # "DejaVu Sans Mono"
-    # "Fantasque Sans Mono"
-    "Fira Mono"
-    # "Hack"
-    # "IBM Plex Mono"
-    # "Inconsolata"
-    # "Iosevka"
-    # "Iosevka Fira"
-    # "NovaMono"
-    # "PT Mono"
-    # "Source Code Pro"
-    # "Space Mono"
-    # "Ubuntu Mono"
-    # "Victor Mono"
-  ;
+  font = {
+    family =
+      # "Andale Mono"
+      # "Anonymous Pro"
+      # "Cascadia Code"
+      # "Cousine"
+      # "Cozette"
+      ## "Cutive Mono"
+      # "DejaVu Sans Mono"
+      # "Fantasque Sans Mono"
+      "Fira Mono"
+      # "Hack"
+      # "IBM Plex Mono"
+      # "Inconsolata"
+      # "Iosevka"
+      # "Iosevka Fira"
+      # "NovaMono"
+      # "PT Mono"
+      # "Source Code Pro"
+      # "Space Mono"
+      # "Ubuntu Mono"
+      # "Victor Mono"
+    ;
+    size = 11;
+  };
 in
 {
   imports = [ ./home.nix ];
@@ -31,7 +34,7 @@ in
 
   gtk = {
     enable = true;
-    font.name = "${font} 11";
+    font.name = "${font.family} ${font.size}";
     theme = {
       package = pkgs.stilo-themes;
       name = "Stilo-dark";
@@ -79,7 +82,7 @@ in
   nixpkgs.overlays = [
     (
       self: super: {
-        chatterino2 = super.libsForQt5.callPackage ./packages/chatterino2.nix {};
+        chatterino2 = super.libsForQt5.callPackage ./packages/chatterino2.nix { };
 
         iosevka-fira = super.iosevka.override {
           set = "fira";
@@ -95,7 +98,7 @@ in
   programs.alacritty = {
     enable = true;
     settings = {
-      font = { normal.family = font; size = 12; };
+      font = { normal.family = font.family; size = font.size; };
       selection.save_to_clipboard = true;
       window.padding = { x = 4; y = 4; };
     };
@@ -129,7 +132,7 @@ in
     enable = true;
     settings.global = {
       geometry = "0x5-20+20";
-      font = "${font} 12";
+      font = "${font} ${font.size}";
       padding = 8;
       horizontal_padding = 8;
     };
@@ -159,16 +162,17 @@ in
   xdg.configFile."streamlink/config".text = ''
     default-stream=best
     hls-live-edge=1
+    hls-segment-stream-data
     player=mpv -af=lavfi=[dynaudnorm=f=10] --cache=no {filename}
+    twitch-disable-ads
     twitch-disable-hosting
+    twitch-disable-reruns
+    twitch-low-latency
   '';
 
   # https://github.com/rycee/home-manager/pull/510
   xdg.dataFile."dbus-1/services/ca.desrt.dconf.service".source =
     "${pkgs.gnome3.dconf}/share/dbus-1/services/ca.desrt.dconf.service";
-
-  # Until Low Latency Twitch is merged into streamlink
-  xdg.configFile."streamlink/plugins/twitch.py".source = ./patches/streamlink-twitch.py;
 
   xdg.configFile."xmonad/xmonad.hs" = {
     source = ./xmonad.hs;
