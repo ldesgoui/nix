@@ -34,7 +34,7 @@ in
 
   gtk = {
     enable = true;
-    font.name = "${font.family} ${font.size}";
+    font.name = "${font.family} ${toString font.size}";
     theme = {
       package = pkgs.stilo-themes;
       name = "Stilo-dark";
@@ -132,9 +132,23 @@ in
     enable = true;
     settings.global = {
       geometry = "0x5-20+20";
-      font = "${font} ${font.size}";
+      font = "${font.family} ${toString font.size}";
       padding = 8;
       horizontal_padding = 8;
+    };
+  };
+
+  systemd.user.services.barrier-server = {
+    Unit = {
+      After = [ "graphical-session-pre.target" ];
+      PartOf = [ "graphical-session.target" ];
+    };
+
+    Install = { WantedBy = [ "graphical-session.target" ]; };
+
+    Service = {
+      ExecStart = "${pkgs.barrier}/bin/barriers -f --enable-crypto --debug INFO --no-tray";
+      Restart = "always";
     };
   };
 
@@ -164,7 +178,6 @@ in
     hls-live-edge=1
     hls-segment-stream-data
     player=mpv -af=lavfi=[dynaudnorm=f=10] --cache=no {filename}
-    twitch-disable-ads
     twitch-disable-hosting
     twitch-disable-reruns
     twitch-low-latency

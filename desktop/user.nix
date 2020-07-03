@@ -49,8 +49,4 @@
     isNormalUser = true;
     uid = 4242;
   };
-
-  services.boinc = { enable = true; allowRemoteGuiRpc = true; };
-  virtualisation.virtualbox.host.enable = true;
-  users.groups.vboxusers.members = [ "ldesgoui" ];
 }

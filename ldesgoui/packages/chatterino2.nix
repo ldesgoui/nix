@@ -18,7 +18,7 @@ mkDerivation rec {
     owner = "Chatterino";
     repo = pname;
     rev = "github-actions-nightly";
-    sha256 = "0z66pqv26mgp39jidydkkcfcghzfpwia1nnpa11n08bbsy5rc2q5";
+    sha256 = "1hk7a2lfcpyvadv0izvv43ncigkm2rmgh6bxnvw3iwpmgg1dy0zb";
     fetchSubmodules = true;
   };
 
