@@ -32,15 +32,25 @@ in
     };
   };
 
+  networking.wireguard.interfaces.wg0 = {
+    ips = [ "10.0.0.1/24" ];
+    listenPort = 51820;
+    privateKeyFile = "/etc/secrets/wireguard/private";
+    peers = [
+      {
+        publicKey = "2HUQtcDlbAiX9Cy330xU5OEB3t3I/appNF6kuURui1I=";
+        allowedIPs = [ "10.0.0.2/32" ];
+      }
+      {
+        publicKey = "WfOd0Wua8KLTjP1dyvm1xa3AHgrwWCfO86ZiaJ4tHBs=";
+        allowedIPs = [ "10.0.0.3/32" ];
+      }
+    ];
+  };
+
   security.acme = {
     acceptTerms = true;
     email = "ldesgoui@gmail.com";
-
-    certs."ldesgoui.xyz" = {
-      allowKeysForGroup = true;
-      group = "acme";
-      postRun = "systemctl restart murmur.service";
-    };
   };
 
   services.fail2ban = {
@@ -50,7 +60,7 @@ in
       backend = systemd
       bantime = 7200
       findtime = 3600
-      ignoreip = 127.0.0.1/8 192.168.0.0/16 10.0.0.0/24 ::1 fe80::/10 2a01:e0a:260:6380::/60
+      ignoreip = 127.0.0.1/8 192.168.0.0/16 10.0.0.0/24 ::1 fe80::/10
       maxretry = 5
     '';
 
@@ -74,21 +84,10 @@ in
     extraConfig = ''
       modules = { "hints" }
 
-      hints["pi.wg0"] = "10.0.0.1"
+      hints["scw.wg0"] = "10.0.0.1"
       hints["desktop.wg0"] = "10.0.0.2"
       hints["op5.wg0"] = "10.0.0.3"
     '';
-  };
-
-
-  services.murmur = {
-    enable = true;
-    bandwidth = 320000;
-    imgMsgLength = 1024 * 1024 * 10;
-    registerName = "ldesgoui.xyz";
-    sslCert = "/var/lib/acme/ldesgoui.xyz/fullchain.pem";
-    sslKey = "/var/lib/acme/ldesgoui.xyz/key.pem";
-    welcometext = "[W̲̅E̲̅L̲̅C̲̅O̲̅M̲̅E̲̅·̲̅T̲̅O̲̅·̲̅T̲̅H̲̅E̲̅·̲̅M̲̅U̲̅M̲̅B̲̅L̲̅E̲̅·̲̅S̲̅E̲̅R̲̅V̲̅E̲̅R̲̅]";
   };
 
   services.nginx = {
@@ -98,7 +97,7 @@ in
     recommendedProxySettings = true;
     recommendedTlsSettings = true;
 
-    virtualHosts."82.64.186.138" = {
+    virtualHosts."212.47.233.201" = {
       default = true;
       globalRedirect = "ldesgoui.xyz";
     };
@@ -122,12 +121,11 @@ in
         add_header X-Xss-Protection "1; mode=block; report=https://ldesgoui.report-uri.com/r/d/xss/enforce";
       '';
     };
-
-    virtualHosts."pi.wg0" = {
-      listen = [ { addr = "10.0.0.1"; port = 80; } ];
-      locations."/ip".return = "200 $remote_addr";
-    };
   };
 
-  users.groups.acme.members = [ "murmur" ];
+  services.openssh = {
+    enable = true;
+    ports = lib.mkForce [ 42022 ];
+    passwordAuthentication = false;
+  };
 }
