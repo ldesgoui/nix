@@ -68,7 +68,9 @@
     enable = true;
     userEmail = "ldesgoui@gmail.com";
     userName = "ldesgoui";
-    ignores = [ ".envrc" "shell.nix" ];
+    extraConfig = {
+      core.pager = "/run/current-system/sw/bin/less";
+    };
   };
 
   programs.htop = {
@@ -105,6 +107,19 @@
     matchBlocks = {
       pi.hostname = "10.0.0.1";
       desktop.hostname = "10.0.0.2";
+
+      scw = {
+        hostname = "scw-elegant-shockley.ldesgoui.xyz";
+        port = 42022;
+        identityFile = "%d/.ssh/scaleway_ed25519";
+      };
+
+      scw-initrd = {
+        hostname = "scw-elegant-shockley.ldesgoui.xyz";
+        port = 41022;
+        user = "root";
+        identityFile = "%d/.ssh/scaleway_ed25519";
+      };
     };
   };
 
