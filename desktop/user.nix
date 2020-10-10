@@ -45,8 +45,13 @@
   # users.mutableUsers = false;
 
   users.users.ldesgoui = {
-    extraGroups = [ "wheel" ];
+    extraGroups = [ "wheel" "vboxusers" "docker" ];
     isNormalUser = true;
     uid = 4242;
   };
+
+  services.jellyfin.enable = true;
+
+  virtualisation.virtualbox.host.enable = true;
+  virtualisation.docker.enable = true;
 }

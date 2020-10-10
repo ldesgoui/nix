@@ -8,6 +8,8 @@
     buildCores = 4;
 
     maxJobs = 4;
+
+    trustedUsers = [ "ldesgoui" ];
   };
 
   nixpkgs.config.allowUnfree = true;
