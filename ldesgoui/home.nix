@@ -12,7 +12,6 @@
     httpie
     nixpkgs-fmt
     ripgrep
-    youtube-dl
   ];
 
   home.sessionVariables = {
@@ -82,6 +81,7 @@
     hideThreads = true;
     hideUserlandThreads = true;
     highlightBaseName = true;
+    meters.left = [ "AllCPUs4" "Memory" "Swap" ];
     shadowOtherUsers = true;
     showProgramPath = false;
     treeView = true;

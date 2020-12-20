@@ -7,7 +7,8 @@ let
       # "Anonymous Pro"
       # "Cascadia Code"
       # "Cousine"
-      # "Cozette"
+ 
+     # "Cozette"
       ## "Cutive Mono"
       # "DejaVu Sans Mono"
       # "Fantasque Sans Mono"
@@ -16,10 +17,10 @@ let
       # "IBM Plex Mono"
       # "Inconsolata"
       # "Iosevka"
-      "Iosevka Fira"
+      # "Iosevka Fira"
       # "NovaMono"
       # "PT Mono"
-      # "Source Code Pro"
+      "Source Code Pro"
       # "Space Mono"
       # "Ubuntu Mono"
       # "Victor Mono"
@@ -47,8 +48,8 @@ in
 
   home.packages = with pkgs; [
     aria2
-    chatterino2
     dmenu
+    chatterino2
     gimp
     libnotify
     maim
@@ -67,7 +68,6 @@ in
     google-fonts
     hack-font
     iosevka
-    iosevka-fira
     victor-mono
   ];
 

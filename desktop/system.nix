@@ -5,9 +5,9 @@
   nix = {
     autoOptimiseStore = true;
 
-    buildCores = 4;
+    buildCores = 0;
 
-    maxJobs = 4;
+    maxJobs = "auto";
 
     trustedUsers = [ "ldesgoui" ];
   };

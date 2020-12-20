@@ -7,10 +7,7 @@
     kernelPackages = pkgs.linuxPackages_latest;
     kernelParams = [
       "quiet"
-      "radeon.si_support=0"
-      "amdgpu.si_support=1"
-      "radeon.cik_support=0"
-      "amdgpu.cik_support=1"
+      "clearcpuid=514"
     ];
 
     loader = {
@@ -33,7 +30,7 @@
   };
 
   hardware = {
-    cpu.intel.updateMicrocode = true;
+    cpu.amd.updateMicrocode = true;
 
     enableRedistributableFirmware = true;
 

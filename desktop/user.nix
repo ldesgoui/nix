@@ -3,7 +3,6 @@
   fonts.fontconfig = {
     allowBitmaps = true;
     useEmbeddedBitmaps = true;
-    penultimate.enable = true;
   };
 
   hardware.pulseaudio.enable = true;
@@ -18,12 +17,13 @@
   services.xserver = {
     desktopManager.xterm.enable = false;
 
+    displayManager.autoLogin = {
+      enable = true;
+      user = "ldesgoui";
+    };
+
     displayManager.lightdm = {
       enable = true;
-      autoLogin = {
-        enable = true;
-        user = "ldesgoui";
-      };
     };
 
     displayManager.defaultSession = "none+xmonad";
@@ -51,6 +51,7 @@
   };
 
   services.jellyfin.enable = true;
+  services.jellyfin.package = pkgs.jellyfin;
 
   virtualisation.virtualbox.host.enable = true;
   virtualisation.docker.enable = true;
