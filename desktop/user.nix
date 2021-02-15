@@ -45,7 +45,7 @@
   # users.mutableUsers = false;
 
   users.users.ldesgoui = {
-    extraGroups = [ "wheel" "vboxusers" "docker" ];
+    extraGroups = [ "wheel" ];
     isNormalUser = true;
     uid = 4242;
   };
@@ -53,6 +53,10 @@
   services.jellyfin.enable = true;
   services.jellyfin.package = pkgs.jellyfin;
 
-  virtualisation.virtualbox.host.enable = true;
-  virtualisation.docker.enable = true;
+  services.murmur.enable = true;
+  services.murmur.bandwidth = 130000;
+  # services.murmur.password = "bacon reporter sprig prevent whiny jawline";
+
+  # virtualisation.virtualbox.host.enable = true;
+  # virtualisation.docker.enable = true;
 }

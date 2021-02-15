@@ -1,13 +1,13 @@
 # hardware.nix
 { pkgs, ... }: {
   boot = {
-    initrd.availableKernelModules = [ "xhci_pci" "ahci" "usbhid" "sd_mod" ];
+    initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "sd_mod" ];
 
-    kernelModules = [ "kvm-intel" ];
+    kernelModules = [ "kvm-amd" ];
     kernelPackages = pkgs.linuxPackages_latest;
     kernelParams = [
       "quiet"
-      "clearcpuid=514"
+      "iommu=soft"
     ];
 
     loader = {
@@ -45,5 +45,7 @@
 
   # services.ratbagd.enable = true;
 
-  #   services.xserver.videoDrivers = [ "amdgpu" ];
+  # services.xserver.videoDrivers = [ "amdgpu" ];
+  # hardware.video.hidpi.enable = true;
+  boot.loader.systemd-boot.memtest86.enable = true;
 }

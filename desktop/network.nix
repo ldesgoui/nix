@@ -7,8 +7,8 @@
     nameservers = [ "10.77.67.1" "1.1.1.1" ];
 
     firewall = {
-      allowedTCPPorts = [ 24800 ];
-      allowedUDPPorts = [ 27015 ];
+      allowedTCPPorts = [ 24800 64738 44444 ];
+      allowedUDPPorts = [ 27015 64738 44400 ];
       trustedInterfaces = [ "wg0" ];
     };
 
@@ -27,8 +27,8 @@
     };
   };
 
-  services.openssh = {
-    enable = true;
-    passwordAuthentication = false;
-  };
+  # services.openssh = {
+  #   enable = true;
+  #   passwordAuthentication = false;
+  # };
 }
